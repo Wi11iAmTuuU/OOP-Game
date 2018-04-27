@@ -22,11 +22,15 @@ namespace game_framework {
 		void SetMovingRight(bool flag); // 設定是否正在往右移動
 		void SetMovingJump(bool flag);	// 設定是否正在往上移動
 		void SetMovingDown(bool flag);	// 設定是否正在往下移動
+		//
+		void SetMovingFly(bool flag);	// 設定是否正在往下移動
+		//
 		void SetXY(int nx, int ny);		// 設定擦子左上角座標
 	protected:
 		CAnimation animation;		// 擦子的動畫
 		CAnimation animation_Underarm;		// 擦子的動畫
 		CAnimation animation_Left;		// 擦子的動畫
+		CAnimation animation_right;		// 擦子的動畫
 		int x, y;					// 擦子左上角座標
 		//
 		int floor;				// 地板的Y座標
@@ -36,6 +40,9 @@ namespace game_framework {
 		int velocity;			// 目前的速度(點/次)
 		bool IsJumping;			// true表跳耀、false表非跳耀
 		bool IsJumpTwice;		// true表已二段跳、false表未二段跳
+		bool Isfalling;
+		//
+		bool isMovingFly;
 		//
 		bool isMovingLeft;			// 是否正在往左移動
 		bool isMovingRight;			// 是否正在往右移動

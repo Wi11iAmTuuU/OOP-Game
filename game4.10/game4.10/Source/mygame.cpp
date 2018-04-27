@@ -112,7 +112,7 @@ void CGameStateInit::OnShow()
 	//
 	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
 	CFont f,*fp;
-	f.CreatePointFont(160,"Times New Roman");	// 產生 font f; 160表示16 point的字
+	f.CreatePointFont(140,"Microsoft JhengHei");	// 產生 font f; 160表示16 point的字
 	fp=pDC->SelectObject(&f);					// 選用 font f
 	pDC->SetBkColor(RGB(0,0,0));
 	pDC->SetTextColor(RGB(255,255,0));
@@ -183,13 +183,14 @@ void CGameStateInit::OnShow()
 	/////////////////////////////////////////////////////////////////////////////
 
 	CGameStateRun::CGameStateRun(CGame *g)
-		: CGameState(g), NUMBALLS(28)
+		: CGameState(g), NUMDIAMOND(5)
 	{
-
+		diamond = new CDiamond[NUMDIAMOND];
 	}
 
 	CGameStateRun::~CGameStateRun()
 	{
+		delete[] diamond;
 	}
 	
 void CGameStateRun::OnBeginState()
@@ -202,15 +203,30 @@ void CGameStateRun::OnBeginState()
 	const int HITS_LEFT_Y = 0;
 	const int BACKGROUND_X = 0;
 	const int ANIMATION_SPEED = 15;
+	//
+	diamond[0].SetXY(340, 1000);
+	diamond[0].SetIsAlive(true);
+
+	diamond[1].SetXY(100, 1000);
+	diamond[1].SetIsAlive(true);
+
+	diamond[2].SetXY(160, 1000);
+	diamond[2].SetIsAlive(true);
+
+	diamond[3].SetXY(220, 1000);
+	diamond[3].SetIsAlive(true);
+
+	diamond[4].SetXY(280, 1000);
+	diamond[4].SetIsAlive(true);
+	//
 	character.Initialize();
 	background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 	hits_left.SetTopLeft(HITS_LEFT_X,HITS_LEFT_Y);		// 指定剩下撞擊數的座標
 	gamemap.Initialize();                               // 設定起始座標
+	// 音樂 //
 	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
-	//CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
-	//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
 	
 }
 
@@ -225,6 +241,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 移動主角
 	//
 	character.OnMove(&gamemap);
+	//
+	for (int i = 0; i < NUMDIAMOND; i++)
+		if (diamond[i].IsAlive() && diamond[i].HitCharacter(&character)) {
+			diamond[i].SetIsAlive(false);
+			hits_left.Add(+1);
+		}
+	//
 	gamemap.OnMove(character.GetX1(), character.GetY1());
 }
 
@@ -239,6 +262,8 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	// 開始載入資料
 	//
 	character.LoadBitmap();
+	for (int i = 0; i < NUMDIAMOND; i++)
+		diamond[i].LoadBitmap();
 	background.LoadBitmap("RES\\Background.bmp");					// 載入背景的圖形
 	//
 	// 完成部分Loading動作，提高進度
@@ -251,10 +276,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	help.LoadBitmap(IDB_HELP,RGB(255,255,255));				// 載入說明的圖形
 	corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形
 	corner.ShowBitmap(background);							// 將corner貼到background								
-	hits_left.LoadBitmap();									
+	hits_left.LoadBitmap();
+	// 音樂 //
 	//CAudio::Instance()->Load(AUDIO_DING,  "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
-	//CAudio::Instance()->Load(AUDIO_LAKE,  "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
-	//CAudio::Instance()->Load(AUDIO_NTUT,  "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
 	//
 	// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
 	//
@@ -267,6 +291,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_SPACE = 0x20; // keyboard空白鍵
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
+	const char KEY_UP	 = 0x26; // keyboard上箭頭
 	if (nChar == KEY_LEFT)
 		character.SetMovingLeft(true);
 	if (nChar == KEY_RIGHT)
@@ -275,6 +300,8 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		character.SetMovingJump(true);
 	if (nChar == KEY_DOWN)
 		character.SetMovingDown(true);
+	if (nChar == KEY_UP)
+		character.SetMovingFly(true);
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -283,6 +310,7 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_SPACE = 0x20; // keyboard空白鍵
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN	 = 0x28; // keyboard下箭頭
+	const char KEY_UP = 0x26; // keyboard上箭頭
 	if (nChar == KEY_LEFT)
 		character.SetMovingLeft(false);
 	if (nChar == KEY_RIGHT)
@@ -291,6 +319,8 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 		character.SetMovingJump(false);
 	if (nChar == KEY_DOWN)
 		character.SetMovingDown(false);
+	if (nChar == KEY_UP)
+		character.SetMovingFly(false);
 }
 
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
@@ -334,6 +364,9 @@ void CGameStateRun::OnShow()
 	hits_left.ShowBitmap();
 	gamemap.OnShow();
 	character.OnShow(&gamemap);					// 貼上擦子
+	//
+	for (int i = 0; i < NUMDIAMOND; i++)
+		diamond[i].OnShow(&gamemap);				// 貼上第i號
 	//
 	//  貼上左上及右下角落的圖
 	//

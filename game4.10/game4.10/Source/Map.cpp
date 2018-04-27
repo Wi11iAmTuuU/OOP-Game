@@ -6,7 +6,7 @@
 #include "gamelib.h"
 #include "CCharacter.h"
 #include "Map.h"
-
+#include "fstream"
 namespace game_framework {
 	
 
@@ -26,8 +26,19 @@ namespace game_framework {
 	{
 		return y - sy;
 	}
+	void Map::ReadMap()
+	{
+		ifstream fin("RES\\MAP\\Map1.txt");
+		for (int i = 0; i < 120; i++) {
+			for (int k = 0; k < 160; k++) {
+				fin >> Map1[i][k];
+			}
+		}
+		fin.close();
+	}
 	void Map::Initialize() //初始化
 	{
+		ReadMap();
 		//const int X_POS = 0;
 		//const int Y_POS = 0;
 		//sx = X_POS;
@@ -38,6 +49,7 @@ namespace game_framework {
 		background.LoadBitmap(IDB_BACKGROUND);
 		block.LoadBitmap(IDB_Brown);
 	}
+
 	void Map::OnMove(int x, int y) 
 	{
 		sx = x - SIZE_X / 2;   //讓人物保持在地圖中間 
@@ -67,7 +79,7 @@ namespace game_framework {
 			for (int j = 0; j < 160; j++) {
 				int x = j * 12 - sx; // 算出第(i, j)這一格的 x 螢幕座標 
 				int y = i * 10 - sy; // 算出第(i, j)這一格的 y 螢幕座標 
-				switch (map[i][j]) {
+				switch (Map1[i][j]) {
 				case 1:
 					block.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
 					block.ShowBitmap();
@@ -86,6 +98,6 @@ namespace game_framework {
 		int gx = x / 12; // 轉換為X軸格座標(整數除法) 
 		int gy = y / 10; // 轉換為Y軸格座標(整數除法) 
 						 //map[x][y]中的y表示X軸的格數，x表示Y軸 
-		return map[gy][gx] == 0; // 假設 0 代表空的 
+		return Map1[gy][gx] == 0; // 假設 0 代表空的 
 	}
 }

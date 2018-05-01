@@ -10,7 +10,6 @@
 #define IDB_RACKET                      131
 #define IDB_ERASER1                     131
 #define IDB_n                           131
-#define IDB_normalblock1                131
 #define IDB_BITMAP1                     132
 #define IDB_BACKGROUND                  132
 #define IDB_CORNER                      133
@@ -49,6 +48,8 @@
 #define IDB_PNG1                        183
 #define IDB_PNG2                        186
 #define IDB_BITMAP9                     188
+#define IDB_BITMAP10                    190
+#define IDB_normalblock1                190
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -61,7 +62,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        189
+#define _APS_NEXT_RESOURCE_VALUE        191
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

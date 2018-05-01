@@ -328,6 +328,7 @@
     <Image Include="..\..\..\..\Desktop\normalblock.png" />
     <Image Include="RES\background 1920 .bmp" />
     <Image Include="RES\background.jpg" />
+    <Image Include="res\bitmap10.bmp" />
     <Image Include="res\bitmap3.bmp" />
     <Image Include="res\bitmap4.bmp" />
     <Image Include="res\bitmap5.bmp" />
@@ -342,7 +343,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="RES\MAP\MAP1.txt" />
-    <Text Include="RES\MAP\Map2txt.txt" />
+    <Text Include="RES\MAP\Map2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

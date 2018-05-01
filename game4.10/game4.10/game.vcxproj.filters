@@ -218,12 +218,15 @@
     <Image Include="RES\normalblock1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\bitmap10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="RES\MAP\MAP1.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="RES\MAP\Map2txt.txt">
+    <Text Include="RES\MAP\Map2.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

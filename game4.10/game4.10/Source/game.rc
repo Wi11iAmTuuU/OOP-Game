@@ -96,7 +96,7 @@ IDB_Brown               BITMAP                  "..\\res\\bitmap4.bmp"
 
 IDB_BACKGROUND          BITMAP                  "..\\RES\\background 1920 .bmp"
 
-IDB_normalblock1        BITMAP                  "..\\RES\\normalblock1.bmp"
+IDB_normalblock1        BITMAP                  "..\\res\\bitmap10.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -105,13 +105,6 @@ IDB_normalblock1        BITMAP                  "..\\RES\\normalblock1.bmp"
 //
 
 IDC_GAMECURSOR          CURSOR                  "..\\res\\gamecurs.cur"
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// PNG
-//
-
 
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////

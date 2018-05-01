@@ -26,7 +26,7 @@ namespace game_framework
 	private:
 		int sx, sy;       // 左上角座標
 		//int mapSize_X, mapSize_Y;   //地圖所切的格數
-		int Map1[120][160] = { 0 };
+		int Map1[30][40] = { 0 };
 
 	};
 }

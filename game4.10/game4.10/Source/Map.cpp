@@ -28,9 +28,9 @@ namespace game_framework {
 	}
 	void Map::ReadMap()
 	{
-		ifstream fin("RES\\MAP\\Map1.txt");
-		for (int i = 0; i < 120; i++) {
-			for (int k = 0; k < 160; k++) {
+		ifstream fin("RES\\MAP\\Map2.txt");
+		for (int i = 0; i < 30; i++) {
+			for (int k = 0; k < 40; k++) {
 				fin >> Map1[i][k];
 			}
 		}
@@ -47,7 +47,7 @@ namespace game_framework {
 	void Map::LoadBitmap() //載入圖片
 	{
 		background.LoadBitmap(IDB_BACKGROUND);
-		block.LoadBitmap(IDB_Brown);
+		block.LoadBitmap(IDB_normalblock1, RGB(255, 255, 255));
 	}
 
 	void Map::OnMove(int x, int y) 
@@ -75,10 +75,10 @@ namespace game_framework {
 	{
 		background.SetTopLeft(-sx, -sy);
 		background.ShowBitmap();
-		for (int i = 0; i < 120; i++) {
-			for (int j = 0; j < 160; j++) {
-				int x = j * 12 - sx; // 算出第(i, j)這一格的 x 螢幕座標 
-				int y = i * 10 - sy; // 算出第(i, j)這一格的 y 螢幕座標 
+		for (int i = 0; i < 30; i++) {
+			for (int j = 0; j < 40; j++) {
+				int x = j * 48 - sx; // 算出第(i, j)這一格的 x 螢幕座標 
+				int y = i * 40 - sy; // 算出第(i, j)這一格的 y 螢幕座標 
 				switch (Map1[i][j]) {
 				case 1:
 					block.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
@@ -95,8 +95,8 @@ namespace game_framework {
 	}
 	bool Map::isEmpty(int x, int y)
 	{
-		int gx = x / 12; // 轉換為X軸格座標(整數除法) 
-		int gy = y / 10; // 轉換為Y軸格座標(整數除法) 
+		int gx = x / 48; // 轉換為X軸格座標(整數除法) 
+		int gy = y / 40; // 轉換為Y軸格座標(整數除法) 
 						 //map[x][y]中的y表示X軸的格數，x表示Y軸 
 		return Map1[gy][gx] == 0; // 假設 0 代表空的 
 	}

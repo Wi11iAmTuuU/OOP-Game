@@ -51,7 +51,7 @@ namespace game_framework {
 	void CCharacter::Initialize()
 	{
 		const int X_POS = 960;
-		const int Y_POS = 1096;
+		const int Y_POS = 1115;
 		x = X_POS;
 		y = Y_POS;
 		isMovingLeft = isMovingRight = isMovingJump = isMovingDown =false;

@@ -201,5 +201,36 @@
     <Image Include="RES\background 1920 .bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\bitmap7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Diamond.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\normalblock.png" />
+    <Image Include="RES\normalblock1.png" />
+    <Image Include="RES\normalblock1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
+<<<<<<< HEAD
+=======
+  <ItemGroup>
+    <Text Include="RES\MAP\MAP1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="RES\MAP\Map2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+>>>>>>> acb4709674ed799093e34f68dc3bcb5688c9d921
 </Project>

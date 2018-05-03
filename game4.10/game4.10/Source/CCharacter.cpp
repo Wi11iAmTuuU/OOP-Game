@@ -49,7 +49,7 @@ namespace game_framework {
 	void CCharacter::Initialize()
 	{
 		const int X_POS = 960;
-		const int Y_POS = 1115;
+		const int Y_POS = 1125;
 		x = X_POS;
 		y = Y_POS;
 		isMovingLeft = isMovingRight = isMovingJump = isMovingDown =false;
@@ -83,6 +83,17 @@ namespace game_framework {
 					break;
 				}
 			}
+			if (i == animation.Height()) {
+				if (((m->GetBlock(x, y + animation.Height() + 2) == 2)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 2))) {
+					x -= 2;
+				}
+				else if (((m->GetBlock(x, y + animation.Height() + 2) == 3)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 3))) {
+					x -= 8;
+				}
+				else {
+					x -= STEP_SIZE;
+				}
+			}
 			if (!IsJumping) {
 				for (j = 0; j < animation.Width(); j++) {  //判斷往左走時下方有沒有東西且不是跳躍的時候
 					if (!(m->isEmpty(x + j, y + animation.Height() + 1))) {
@@ -96,14 +107,22 @@ namespace game_framework {
 					}
 				}
 			}
-			if (i == animation.Height()) {  
-				x -= STEP_SIZE;
-			}
 		}
 		if (isMovingRight && !isMovingDown){
 			for (i = 0; i < animation.Height(); i++) {   //判斷往右邊走兩個有沒有撞到障礙物
 				if (!(m->isEmpty(x + animation.Width() + 5, y + i))) {
 					break;
+				}
+			}
+			if (i == animation.Height()) {
+				if (((m->GetBlock(x, y + animation.Height() + 2) == 2)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 2))) {
+					x += 2;
+				}
+				else if (((m->GetBlock(x, y + animation.Height() + 2) == 3)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 3))) {
+					x += 8;
+				}
+				else {
+					x += STEP_SIZE;
 				}
 			}
 			if (!IsJumping) {  
@@ -118,9 +137,6 @@ namespace game_framework {
 						velocity = 1;
 					}
 				}
-			}
-			if (i == animation.Height()) {
-				x += STEP_SIZE;
 			}
 		}
 		if (Isfalling == true && IsJumping == false) {  //判斷是否為下降狀態

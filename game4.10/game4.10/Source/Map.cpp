@@ -26,6 +26,13 @@ namespace game_framework {
 	{
 		return y - sy;
 	}
+	int Map::GetBlock(int x, int y)
+	{
+		int gx = x / 48; // 轉換為X軸格座標(整數除法) 
+		int gy = y / 40; // 轉換為Y軸格座標(整數除法) 
+						 //map[x][y]中的y表示X軸的格數，x表示Y軸 
+		return Map1[gy][gx]; // 回傳方塊 
+	}
 	void Map::ReadMap()
 	{
 		ifstream fin("RES\\MAP\\Map2.txt");
@@ -47,7 +54,9 @@ namespace game_framework {
 	void Map::LoadBitmap() //載入圖片
 	{
 		background.LoadBitmap(IDB_BACKGROUND);
-		block.LoadBitmap(IDB_normalblock1, RGB(255, 255, 255));
+		Normalblock.LoadBitmap("RES\\normalblock.bmp", RGB(255, 255, 255));
+		LoseSpeedBlock.LoadBitmap("RES\\LosespeedBlock.bmp", RGB(255, 255, 255));
+		SpeedBlock.LoadBitmap("RES\\SpeedBlock.bmp", RGB(255, 255, 255));
 	}
 
 	void Map::OnMove(int x, int y) 
@@ -81,8 +90,16 @@ namespace game_framework {
 				int y = i * 40 - sy; // 算出第(i, j)這一格的 y 螢幕座標 
 				switch (Map1[i][j]) {
 				case 1:
-					block.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
-					block.ShowBitmap();
+					Normalblock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					Normalblock.ShowBitmap();
+					break;
+				case 2:
+					LoseSpeedBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					LoseSpeedBlock.ShowBitmap();
+					break;
+				case 3:
+					SpeedBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					SpeedBlock.ShowBitmap();
 					break;
 				}
 			}

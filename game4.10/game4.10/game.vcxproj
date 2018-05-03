@@ -243,9 +243,6 @@
     <None Include="RES\center.bmp" />
     <None Include="RES\continue.bmp" />
     <None Include="Res\corner.bmp" />
-    <None Include="RES\eraser1.bmp" />
-    <None Include="RES\eraser2.bmp" />
-    <None Include="RES\eraser3.bmp" />
     <None Include="res\game.ico" />
     <None Include="res\game.rc2" />
     <None Include="RES\gamecurs.cur" />
@@ -325,29 +322,18 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\normalblock.png" />
     <Image Include="RES\background 1920 .bmp" />
     <Image Include="RES\background.jpg" />
     <Image Include="res\bitmap10.bmp" />
-    <Image Include="res\bitmap3.bmp" />
     <Image Include="res\bitmap4.bmp" />
-    <Image Include="res\bitmap5.bmp" />
-    <Image Include="res\bitmap6.bmp" />
-    <Image Include="res\bitmap7.bmp" />
-    <Image Include="res\bitmap8.bmp" />
-    <Image Include="res\bitmap9.bmp" />
     <Image Include="RES\Diamond.bmp" />
     <Image Include="RES\LOGO.bmp" />
     <Image Include="RES\normalblock1.bmp" />
-    <Image Include="RES\normalblock1.png" />
   </ItemGroup>
-<<<<<<< HEAD
-=======
   <ItemGroup>
     <Text Include="RES\MAP\MAP1.txt" />
     <Text Include="RES\MAP\Map2.txt" />
   </ItemGroup>
->>>>>>> acb4709674ed799093e34f68dc3bcb5688c9d921
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

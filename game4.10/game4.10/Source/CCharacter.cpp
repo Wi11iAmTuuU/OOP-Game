@@ -17,8 +17,6 @@ namespace game_framework {
 		Initialize();
 		//
 		const int INITIAL_VELOCITY = 10;	// 初始上升速度
-		//const int FLOOR = 1095;				// 地板座標
-		floor = 1098;
 		rising = true;
 		falling = true;
 		initial_velocity = INITIAL_VELOCITY;
@@ -60,17 +58,17 @@ namespace game_framework {
 
 	void CCharacter::LoadBitmap()
 	{
-		animation.AddBitmap("RES\\Character1.bmp", RGB(255, 255, 255));
+		animation.AddBitmap("RES\\Character\\Character1.bmp", RGB(255, 255, 255));
 		//
-		animation_right.AddBitmap("RES\\CharacterW1.bmp", RGB(255, 255, 255));
-		animation_right.AddBitmap("RES\\CharacterW2.bmp", RGB(255, 255, 255));
-		animation_right.AddBitmap("RES\\Character1.bmp", RGB(255, 255, 255));
+		animation_right.AddBitmap("RES\\Character\\CharacterW1.bmp", RGB(255, 255, 255));
+		animation_right.AddBitmap("RES\\Character\\CharacterW2.bmp", RGB(255, 255, 255));
+		animation_right.AddBitmap("RES\\Character\\Character1.bmp", RGB(255, 255, 255));
 		//
-		animation_Underarm.AddBitmap("RES\\CharacterD.bmp", RGB(255, 255, 255));
+		animation_Underarm.AddBitmap("RES\\Character\\CharacterD.bmp", RGB(255, 255, 255));
 		//
-		animation_Left.AddBitmap("RES\\CharacterW1L.bmp", RGB(255, 255, 255));
-		animation_Left.AddBitmap("RES\\CharacterW2L.bmp", RGB(255, 255, 255));
-		animation_Left.AddBitmap("RES\\CharacterL.bmp", RGB(255, 255, 255));
+		animation_Left.AddBitmap("RES\\Character\\CharacterW1L.bmp", RGB(255, 255, 255));
+		animation_Left.AddBitmap("RES\\Character\\CharacterW2L.bmp", RGB(255, 255, 255));
+		animation_Left.AddBitmap("RES\\Character\\CharacterL.bmp", RGB(255, 255, 255));
 		//
 	}
 

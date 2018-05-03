@@ -61,15 +61,6 @@
     <None Include="Res\corner.bmp">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="RES\eraser1.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\eraser2.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\eraser3.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\game.ico">
       <Filter>Resource Files</Filter>
     </None>
@@ -180,16 +171,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\bitmap3.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="res\bitmap4.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\bitmap5.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\bitmap6.bmp">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="RES\LOGO.bmp">
@@ -201,20 +183,9 @@
     <Image Include="RES\background 1920 .bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\bitmap7.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\bitmap8.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="RES\Diamond.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\bitmap9.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Desktop\normalblock.png" />
-    <Image Include="RES\normalblock1.png" />
     <Image Include="RES\normalblock1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
@@ -222,8 +193,6 @@
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
-<<<<<<< HEAD
-=======
   <ItemGroup>
     <Text Include="RES\MAP\MAP1.txt">
       <Filter>Resource Files</Filter>
@@ -232,5 +201,4 @@
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
->>>>>>> acb4709674ed799093e34f68dc3bcb5688c9d921
 </Project>

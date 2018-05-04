@@ -79,6 +79,9 @@
     <None Include="RES\loading.bmp">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="RES\ntutcsie.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="res\Toolbar.bmp">
       <Filter>Resource Files</Filter>
     </None>
@@ -183,22 +186,10 @@
     <Image Include="RES\Diamond.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\normalblock1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
     <Image Include="res\bitmap10.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Desktop\bmp00001.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\bitmap11.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\SpeedBlock.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\normalblock.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\LosespeedBlock.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

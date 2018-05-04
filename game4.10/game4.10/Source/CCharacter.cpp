@@ -52,7 +52,7 @@ namespace game_framework {
 		const int Y_POS = 1125;
 		x = X_POS;
 		y = Y_POS;
-		isMovingLeft = isMovingRight = isMovingJump = isMovingDown =false;
+		isMovingLeft = isMovingRight = isMovingJump = isMovingDown = false;
 		isMovingFly = false;
 	}
 
@@ -108,7 +108,7 @@ namespace game_framework {
 				}
 			}
 		}
-		if (isMovingRight && !isMovingDown){
+		if (isMovingRight && !isMovingDown) {
 			for (i = 0; i < animation.Height(); i++) {   //判斷往右邊走兩個有沒有撞到障礙物
 				if (!(m->isEmpty(x + animation.Width() + 5, y + i))) {
 					break;
@@ -125,13 +125,13 @@ namespace game_framework {
 					x += STEP_SIZE;
 				}
 			}
-			if (!IsJumping) {  
+			if (!IsJumping) {
 				for (j = 0; j < animation.Width(); j++) {  //判斷往右走時下方有沒有東西且不是跳躍的時候
 					if (!(m->isEmpty(x + j, y + animation.Height() + 1))) {
 						Isfalling = false;
 						break;
 					}
-					else if(!Isfalling){
+					else if (!Isfalling) {
 						Isfalling = true;
 						rising = false;
 						velocity = 1;
@@ -160,8 +160,8 @@ namespace game_framework {
 			}
 		}
 		if (isMovingDown) {
-			
-		}	
+
+		}
 		//
 		if (isMovingJump && IsJumping == false && !isMovingDown) {
 			IsJumping = true;		// 跳躍狀態
@@ -200,7 +200,7 @@ namespace game_framework {
 			}
 			else {				// 下降狀態
 				for (i = 0; i < animation.Width(); i++) {
-					for (j = 0 ; j < velocity ; j++) {
+					for (j = 0; j < velocity; j++) {
 						if (!(m->isEmpty(x + i, y + animation.Height() + j))) {  //判斷人物下方是不是有障礙物
 							y = y + j;
 							rising = true;
@@ -221,7 +221,7 @@ namespace game_framework {
 		//
 		/*if (isMovingFly)
 		{
-			y-=50.3;
+		y-=50.3;
 		}*/
 		//
 	}
@@ -263,7 +263,7 @@ namespace game_framework {
 			animation_Underarm.SetTopLeft(m->ScreenX(x), m->ScreenY(y));
 			animation_Underarm.OnShow();
 		}
-		else if(isMovingLeft){
+		else if (isMovingLeft) {
 			animation_Left.SetTopLeft(m->ScreenX(x), m->ScreenY(y));
 			animation_Left.OnShow();
 			animation_Left.OnMove();

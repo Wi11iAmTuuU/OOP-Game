@@ -249,6 +249,7 @@
     <None Include="res\gameDoc.ico" />
     <None Include="RES\help.bmp" />
     <None Include="RES\loading.bmp" />
+    <None Include="RES\ntutcsie.bmp" />
     <None Include="res\Toolbar.bmp" />
   </ItemGroup>
   <ItemGroup>
@@ -321,17 +322,13 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\bmp00001.bmp" />
     <Image Include="RES\background 1920 .bmp" />
     <Image Include="RES\background.jpg" />
     <Image Include="res\bitmap10.bmp" />
-    <Image Include="res\bitmap11.bmp" />
     <Image Include="res\bitmap4.bmp" />
     <Image Include="RES\Diamond.bmp" />
     <Image Include="RES\LOGO.bmp" />
-    <Image Include="RES\LosespeedBlock.bmp" />
-    <Image Include="RES\normalblock.bmp" />
-    <Image Include="RES\SpeedBlock.bmp" />
+    <Image Include="RES\normalblock1.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="RES\MAP\MAP1.txt" />

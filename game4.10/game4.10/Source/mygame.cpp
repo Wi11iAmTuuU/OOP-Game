@@ -204,19 +204,19 @@ void CGameStateRun::OnBeginState()
 	const int BACKGROUND_X = 0;
 	const int ANIMATION_SPEED = 15;
 	//
-	diamond[0].SetXY(340, 1000);
+	diamond[0].SetMapXY(37, 21);
 	diamond[0].SetIsAlive(true);
 
-	diamond[1].SetXY(100, 1000);
+	diamond[1].SetMapXY(18, 19);
 	diamond[1].SetIsAlive(true);
 
-	diamond[2].SetXY(160, 1000);
+	diamond[2].SetMapXY(16, 17);
 	diamond[2].SetIsAlive(true);
 
-	diamond[3].SetXY(220, 1000);
+	diamond[3].SetMapXY(4, 27);
 	diamond[3].SetIsAlive(true);
 
-	diamond[4].SetXY(280, 1000);
+	diamond[4].SetMapXY(16, 28);
 	diamond[4].SetIsAlive(true);
 	//
 	character.Initialize();

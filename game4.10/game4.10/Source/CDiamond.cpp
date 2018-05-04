@@ -13,6 +13,7 @@ namespace game_framework {
 	{
 		is_alive = true;
 		x = y = 0;
+		mapX = mapY = 0;
 	}
 
 	bool CDiamond::HitCharacter(CCharacter * character)
@@ -39,9 +40,12 @@ namespace game_framework {
 		}
 	}
 
-	void CDiamond::SetXY(int nx, int ny)
+	void CDiamond::SetMapXY(int nx, int ny)
 	{
-		x = nx; y = ny;
+		mapX = nx; 
+		mapY = ny;
+		x = (mapX * 48)+6;
+		y = (mapY * 40)+2;
 	}
 
 	void CDiamond::SetIsAlive(bool alive)

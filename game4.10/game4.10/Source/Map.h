@@ -28,8 +28,8 @@ namespace game_framework
 		CMovingBitmap SpeedBlock;     //顯示加速方塊
 	private:
 		int sx, sy;       // 左上角座標
-		//int mapSize_X, mapSize_Y;   //地圖所切的格數
+						  
 		int Map1[30][40] = { 0 };   // 1 = 一般方塊 2 = 減速方塊 3 = 加速方塊
- 
+
 	};
 }

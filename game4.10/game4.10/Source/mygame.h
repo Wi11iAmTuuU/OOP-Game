@@ -40,7 +40,7 @@
 */
 
 #include "CCharacter.h"
-#include "CBlock.h"
+#include "Counter.h"
 #include "Map.h"
 #include "CDiamond.h"
 
@@ -112,7 +112,7 @@ namespace game_framework {
 		CMovingBitmap	corner;		// 角落圖
 		CDiamond		*diamond;	// 鑽石
 		CCharacter		character;	// 拍子
-		CInteger		hits_left;	// 剩下的撞擊數
+		Counter			counter;	// 計數器
 		Map	gamemap;
 	};
 

@@ -249,13 +249,14 @@
     <None Include="res\gameDoc.ico" />
     <None Include="RES\help.bmp" />
     <None Include="RES\loading.bmp" />
+    <None Include="RES\ntutcsie.bmp" />
     <None Include="res\Toolbar.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\audio.cpp" />
-    <ClCompile Include="Source\CBlock.cpp" />
     <ClCompile Include="Source\CCharacter.cpp" />
     <ClCompile Include="Source\CDiamond.cpp" />
+    <ClCompile Include="Source\Counter.cpp" />
     <ClCompile Include="Source\game.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -300,9 +301,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
-    <ClInclude Include="Source\CBlock.h" />
     <ClInclude Include="Source\CCharacter.h" />
     <ClInclude Include="Source\CDiamond.h" />
+    <ClInclude Include="Source\Counter.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Source\game.h" />
     <ClInclude Include="Source\gameDoc.h" />
     <ClInclude Include="Source\gameView.h" />
@@ -321,17 +324,13 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\bmp00001.bmp" />
     <Image Include="RES\background 1920 .bmp" />
     <Image Include="RES\background.jpg" />
     <Image Include="res\bitmap10.bmp" />
-    <Image Include="res\bitmap11.bmp" />
     <Image Include="res\bitmap4.bmp" />
     <Image Include="RES\Diamond.bmp" />
     <Image Include="RES\LOGO.bmp" />
-    <Image Include="RES\LosespeedBlock.bmp" />
-    <Image Include="RES\normalblock.bmp" />
-    <Image Include="RES\SpeedBlock.bmp" />
+    <Image Include="RES\normalblock1.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="RES\MAP\MAP1.txt" />

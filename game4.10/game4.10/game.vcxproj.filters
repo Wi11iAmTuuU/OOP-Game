@@ -79,6 +79,9 @@
     <None Include="RES\loading.bmp">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="RES\ntutcsie.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="res\Toolbar.bmp">
       <Filter>Resource Files</Filter>
     </None>
@@ -111,13 +114,13 @@
     <ClCompile Include="Source\CCharacter.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CBlock.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Map.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\CDiamond.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Counter.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -152,13 +155,13 @@
     <ClInclude Include="Source\CCharacter.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CBlock.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Map.h">
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\CDiamond.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Counter.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>
@@ -183,22 +186,10 @@
     <Image Include="RES\Diamond.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\normalblock1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
     <Image Include="res\bitmap10.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Desktop\bmp00001.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\bitmap11.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\SpeedBlock.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\normalblock.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\LosespeedBlock.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

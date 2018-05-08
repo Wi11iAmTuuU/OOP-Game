@@ -8,7 +8,7 @@
 #include "Map.h"
 #include "fstream"
 namespace game_framework {
-	
+
 
 	int Map::GetWidth() //取得背景寬度 
 	{
@@ -116,5 +116,13 @@ namespace game_framework {
 		int gy = y / 40; // 轉換為Y軸格座標(整數除法) 
 						 //map[x][y]中的y表示X軸的格數，x表示Y軸 
 		return Map1[gy][gx] == 0; // 假設 0 代表空的 
+	}
+	int Map::Getsx()
+	{
+		return sx;
+	}
+	int Map::Getsy()
+	{
+		return sy;
 	}
 }

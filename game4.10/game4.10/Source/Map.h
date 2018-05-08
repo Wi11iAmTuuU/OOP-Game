@@ -9,27 +9,28 @@ namespace game_framework
 	class Map
 	{
 	public:
-		int  GetWidth();                    //取得背景寬度
-		int  GetHeight();                   //取得背景高度
-		int  ScreenX(int x);    // 螢幕 x 座標
-		int  ScreenY(int y);    // 螢幕 y 座標
-		int  GetBlock(int x, int y); //取得方塊
-		void Initialize();     // 設定為初始值
-		void LoadBitmap();   // 載入圖形
-		void ReadMap();      //載入地圖
-		void OnMove(int, int);               // 地圖移動
-		void OnShow();      // 將圖形貼到畫面
+		int  GetWidth();                    // 取得背景寬度
+		int  GetHeight();                   // 取得背景高度
+		int  ScreenX(int x);				// 螢幕 x 座標
+		int  ScreenY(int y);				// 螢幕 y 座標
+		int  GetBlock(int x, int y);		// 取得方塊
+		void Initialize();					// 設定為初始值
+		void LoadBitmap();					// 載入圖形
+		void ReadMap();						// 載入地圖
+		void OnMove(int, int);              // 地圖移動
+		void OnShow();						// 將圖形貼到畫面
 		void SetXY(int nx, int ny);         // 設定螢幕畫面左上角的座標
 		bool isEmpty(int x, int y);         // 判斷碰壁;
+		int	 Getsx();						// 計數器用
+		int	 Getsy();						// 計數器用
 	protected:
-		CMovingBitmap background;   // 地圖
-		CMovingBitmap Normalblock;     //顯示一般方塊
-		CMovingBitmap LoseSpeedBlock;     //顯示減速方塊
-		CMovingBitmap SpeedBlock;     //顯示加速方塊
+		CMovingBitmap background;			// 地圖
+		CMovingBitmap Normalblock;			//顯示一般方塊
+		CMovingBitmap LoseSpeedBlock;		//顯示減速方塊
+		CMovingBitmap SpeedBlock;			//顯示加速方塊
 	private:
-		int sx, sy;       // 左上角座標
-		//int mapSize_X, mapSize_Y;   //地圖所切的格數
+		int sx, sy;							// 左上角座標
 		int Map1[30][40] = { 0 };   // 1 = 一般方塊 2 = 減速方塊 3 = 加速方塊
- 
+
 	};
 }

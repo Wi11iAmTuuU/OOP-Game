@@ -219,10 +219,10 @@ namespace game_framework {
 			}
 		}
 		//
-		/*if (isMovingFly)
+		if (isMovingFly)
 		{
-			y-=50.3;
-		}*/
+			y-=50;
+		}
 		//
 	}
 

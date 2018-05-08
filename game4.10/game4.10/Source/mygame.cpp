@@ -239,7 +239,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	//
 	// 移動主角
-	//
+	// 
 	character.OnMove(&gamemap);
 	//
 	for (int i = 0; i < NUMDIAMOND; i++)

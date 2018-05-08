@@ -59,7 +59,7 @@ namespace game_framework {
 		SpeedBlock.LoadBitmap("RES\\SpeedBlock.bmp", RGB(255, 255, 255));
 	}
 
-	void Map::OnMove(int x, int y) 
+	void Map::OnMove(int x, int y)
 	{
 		sx = x - SIZE_X / 2;   //讓人物保持在地圖中間 
 		sy = y - SIZE_Y / 2;

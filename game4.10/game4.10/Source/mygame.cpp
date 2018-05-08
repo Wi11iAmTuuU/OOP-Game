@@ -222,8 +222,6 @@ void CGameStateRun::OnBeginState()
 	character.Initialize();
 	background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
-	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
-	hits_left.SetTopLeft(HITS_LEFT_X,HITS_LEFT_Y);		// 指定剩下撞擊數的座標
 	gamemap.Initialize();                               // 設定起始座標
 	// 音樂 //
 	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
@@ -245,7 +243,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	for (int i = 0; i < NUMDIAMOND; i++)
 		if (diamond[i].IsAlive() && diamond[i].HitCharacter(&character)) {
 			diamond[i].SetIsAlive(false);
-			hits_left.Add(+1);
+			counter.Add(1);
 		}
 	//
 	gamemap.OnMove(character.GetX1(), character.GetY1());
@@ -261,6 +259,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	//
 	// 開始載入資料
 	//
+	counter.LoadBitmap();
 	character.LoadBitmap();
 	for (int i = 0; i < NUMDIAMOND; i++)
 		diamond[i].LoadBitmap();
@@ -276,7 +275,6 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	help.LoadBitmap(IDB_HELP,RGB(255,255,255));				// 載入說明的圖形
 	corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形
 	corner.ShowBitmap(background);							// 將corner貼到background								
-	hits_left.LoadBitmap();
 	// 音樂 //
 	//CAudio::Instance()->Load(AUDIO_DING,  "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
 	//
@@ -361,12 +359,13 @@ void CGameStateRun::OnShow()
 	//
 	background.ShowBitmap();			// 貼上背景圖
 	help.ShowBitmap();					// 貼上說明圖
-	hits_left.ShowBitmap();
 	gamemap.OnShow();
 	character.OnShow(&gamemap);					// 貼上擦子
 	//
 	for (int i = 0; i < NUMDIAMOND; i++)
 		diamond[i].OnShow(&gamemap);				// 貼上第i號
+
+	counter.OnShow(&gamemap);
 	//
 	//  貼上左上及右下角落的圖
 	//

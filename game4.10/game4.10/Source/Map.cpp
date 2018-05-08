@@ -117,4 +117,12 @@ namespace game_framework {
 						 //map[x][y]中的y表示X軸的格數，x表示Y軸 
 		return Map1[gy][gx] == 0; // 假設 0 代表空的 
 	}
+	int Map::Getsx()
+	{
+		return sx;
+	}
+	int Map::Getsy()
+	{
+		return sy;
+	}
 }

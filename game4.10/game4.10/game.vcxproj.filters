@@ -114,13 +114,13 @@
     <ClCompile Include="Source\CCharacter.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CBlock.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Map.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\CDiamond.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Counter.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,13 +155,13 @@
     <ClInclude Include="Source\CCharacter.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CBlock.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Map.h">
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\CDiamond.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Counter.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

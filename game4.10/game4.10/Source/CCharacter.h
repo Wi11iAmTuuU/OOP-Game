@@ -16,7 +16,7 @@ namespace game_framework {
 		int  GetY2();					// 擦子右下角 y 座標
 		void Initialize();				// 設定擦子為初始值
 		void LoadBitmap();				// 載入圖形
-		void OnMove(Map*);					// 移動擦子
+		void OnMove(Map*,int*);					// 移動擦子
 		void OnShow(Map*);					// 將擦子圖形貼到畫面
 		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
 		void SetMovingRight(bool flag); // 設定是否正在往右移動
@@ -26,12 +26,15 @@ namespace game_framework {
 		void SetMovingFly(bool flag);	// 設定是否正在往下移動
 		//
 		void SetXY(int nx, int ny);		// 設定擦子左上角座標
+		int  GetMapNumber();				// 取的地圖編號
+		void ChangeMapNumber(int);             //改變地圖編號
 	protected:
 		CAnimation animation;		// 擦子的動畫
 		CAnimation animation_Underarm;		// 擦子的動畫
 		CAnimation animation_Left;		// 擦子的動畫
 		CAnimation animation_right;		// 擦子的動畫
 		int x, y;					// 擦子左上角座標
+		int MapNumber;
 		//
 		int floor;				// 地板的Y座標
 		bool rising;			// true表上升、false表下降

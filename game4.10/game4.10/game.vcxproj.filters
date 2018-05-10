@@ -192,12 +192,15 @@
     <Image Include="res\bitmap10.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\door.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="RES\MAP\MAP1.txt">
+    <Text Include="RES\MAP\Map2.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="RES\MAP\Map2.txt">
+    <Text Include="RES\MAP\Map1.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

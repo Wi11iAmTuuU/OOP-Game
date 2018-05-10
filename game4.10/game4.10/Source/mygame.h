@@ -107,13 +107,15 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		const int		NUMDIAMOND;	// 鑽石的總數
+		int				MapNumber;  // 地圖編號
 		CMovingBitmap	background;	// 背景圖
 		CMovingBitmap	help;		// 說明圖
 		CMovingBitmap	corner;		// 角落圖
 		CDiamond		*diamond;	// 鑽石
 		CCharacter		character;	// 拍子
 		Counter			counter;	// 計數器
-		Map	gamemap;
+		Map	gamemap[5];
+		Map *GameMap;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

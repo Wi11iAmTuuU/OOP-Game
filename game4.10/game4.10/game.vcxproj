@@ -329,11 +329,12 @@
     <Image Include="res\bitmap10.bmp" />
     <Image Include="res\bitmap4.bmp" />
     <Image Include="RES\Diamond.bmp" />
+    <Image Include="RES\door.bmp" />
     <Image Include="RES\LOGO.bmp" />
     <Image Include="RES\normalblock1.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="RES\MAP\MAP1.txt" />
+    <Text Include="RES\MAP\Map1.txt" />
     <Text Include="RES\MAP\Map2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -183,7 +183,7 @@ void CGameStateInit::OnShow()
 	/////////////////////////////////////////////////////////////////////////////
 
 	CGameStateRun::CGameStateRun(CGame *g)
-		: CGameState(g), NUMDIAMOND(5)
+		: CGameState(g), NUMDIAMOND(5), MapNumber(0)
 	{
 		diamond = new CDiamond[NUMDIAMOND];
 	}
@@ -222,7 +222,8 @@ void CGameStateRun::OnBeginState()
 	character.Initialize();
 	background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
-	gamemap.Initialize();                               // 設定起始座標
+	GameMap = &gamemap[MapNumber];
+	GameMap->ReadMap(MapNumber);                               // 設定起始座標
 	// 音樂 //
 	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 	
@@ -238,7 +239,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	// 移動主角
 	// 
-	character.OnMove(&gamemap);
+	character.OnMove(&gamemap[MapNumber],&MapNumber);
 	//
 	for (int i = 0; i < NUMDIAMOND; i++)
 		if (diamond[i].IsAlive() && diamond[i].HitCharacter(&character)) {
@@ -246,7 +247,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			counter.Add(1);
 		}
 	//
-	gamemap.OnMove(character.GetX1(), character.GetY1());
+	GameMap->OnMove(character.GetX1(), character.GetY1());
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -280,7 +281,8 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	//
 	// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
 	//
-	gamemap.LoadBitmap();
+	gamemap[0].LoadBitmap();
+	gamemap[1].LoadBitmap();
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -359,13 +361,20 @@ void CGameStateRun::OnShow()
 	//
 	background.ShowBitmap();			// 貼上背景圖
 	help.ShowBitmap();					// 貼上說明圖
-	gamemap.OnShow();
-	character.OnShow(&gamemap);					// 貼上擦子
+	GameMap = &gamemap[MapNumber];
+	GameMap->ReadMap(MapNumber);
+	GameMap->OnShow(MapNumber);
+	character.OnShow(GameMap);					// 貼上擦子
 	//
-	for (int i = 0; i < NUMDIAMOND; i++)
-		diamond[i].OnShow(&gamemap);				// 貼上第i號
+	if (MapNumber == 1) {
+		for (int i = 0; i < NUMDIAMOND; i++)
+			diamond[i].OnShow(GameMap);				// 貼上第i號
 
-	counter.OnShow(&gamemap);
+	}
+	//for (int i = 0; i < NUMDIAMOND; i++)
+	//	diamond[i].OnShow(GameMap);				// 貼上第i號
+
+	counter.OnShow(GameMap);
 	//
 	//  貼上左上及右下角落的圖
 	//

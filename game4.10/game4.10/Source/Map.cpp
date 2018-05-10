@@ -33,19 +33,29 @@ namespace game_framework {
 						 //map[x][y]中的y表示X軸的格數，x表示Y軸 
 		return Map1[gy][gx]; // 回傳方塊 
 	}
-	void Map::ReadMap()
-	{
-		ifstream fin("RES\\MAP\\Map2.txt");
-		for (int i = 0; i < 30; i++) {
-			for (int k = 0; k < 40; k++) {
-				fin >> Map1[i][k];
+	void Map::ReadMap(int MapNumber)
+	{	
+		if (MapNumber == 0) {
+			ifstream fin("RES\\MAP\\Map1.txt");
+			for (int i = 0; i < 30; i++) {
+				for (int k = 0; k < 40; k++) {
+					fin >> Map1[i][k];
+				}
 			}
+			fin.close();
 		}
-		fin.close();
+		else if (MapNumber == 1) {
+			ifstream fin("RES\\MAP\\Map2.txt");
+			for (int i = 0; i < 30; i++) {
+				for (int k = 0; k < 40; k++) {
+					fin >> Map1[i][k];
+				}
+			}
+			fin.close();
+		}
 	}
 	void Map::Initialize() //初始化
 	{
-		ReadMap();
 		//const int X_POS = 0;
 		//const int Y_POS = 0;
 		//sx = X_POS;
@@ -57,6 +67,7 @@ namespace game_framework {
 		Normalblock.LoadBitmap("RES\\normalblock.bmp", RGB(255, 255, 255));
 		LoseSpeedBlock.LoadBitmap("RES\\LosespeedBlock.bmp", RGB(255, 255, 255));
 		SpeedBlock.LoadBitmap("RES\\SpeedBlock.bmp", RGB(255, 255, 255));
+		door.LoadBitmap("RES\\door.bmp", RGB(255, 255, 255));
 	}
 
 	void Map::OnMove(int x, int y)
@@ -80,7 +91,7 @@ namespace game_framework {
 			sy = background.Height() - SIZE_Y;
 		}
 	}
-	void Map::OnShow()
+	void Map::OnShow(int MapNumber)
 	{
 		background.SetTopLeft(-sx, -sy);
 		background.ShowBitmap();
@@ -88,19 +99,37 @@ namespace game_framework {
 			for (int j = 0; j < 40; j++) {
 				int x = j * 48 - sx; // 算出第(i, j)這一格的 x 螢幕座標 
 				int y = i * 40 - sy; // 算出第(i, j)這一格的 y 螢幕座標 
-				switch (Map1[i][j]) {
-				case 1:
-					Normalblock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
-					Normalblock.ShowBitmap();
-					break;
-				case 2:
-					LoseSpeedBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
-					LoseSpeedBlock.ShowBitmap();
-					break;
-				case 3:
-					SpeedBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
-					SpeedBlock.ShowBitmap();
-					break;
+				if (MapNumber == 0) {
+					switch (Map1[i][j]) {
+					case 1:
+						Normalblock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+						Normalblock.ShowBitmap();
+						break;
+					case 11:
+						door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+						door.ShowBitmap();
+						break;
+					}
+				}
+				if (MapNumber == 1) {
+					switch (Map1[i][j]) {
+					case 1:
+						Normalblock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+						Normalblock.ShowBitmap();
+						break;
+					case 2:
+						LoseSpeedBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+						LoseSpeedBlock.ShowBitmap();
+						break;
+					case 3:
+						SpeedBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+						SpeedBlock.ShowBitmap();
+						break;
+					case 12:
+						door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+						door.ShowBitmap();
+						break;
+					}
 				}
 			}
 		}
@@ -125,4 +154,12 @@ namespace game_framework {
 	{
 		return sy;
 	}
+	//int Map::GetMapNumber()
+	//{
+	//	return MapNumber;
+	//}
+	//void Map::ChangeMapNumber(int index)
+	//{
+	//	MapNumber = index;
+	//}
 }

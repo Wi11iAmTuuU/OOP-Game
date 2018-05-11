@@ -183,14 +183,13 @@ void CGameStateInit::OnShow()
 	/////////////////////////////////////////////////////////////////////////////
 
 	CGameStateRun::CGameStateRun(CGame *g)
-		: CGameState(g), NUMDIAMOND(5), MapNumber(0)
+		: CGameState(g), MapNumber(0)
 	{
-		diamond = new CDiamond[NUMDIAMOND];
+		
 	}
 
 	CGameStateRun::~CGameStateRun()
 	{
-		delete[] diamond;
 	}
 	
 void CGameStateRun::OnBeginState()
@@ -203,21 +202,22 @@ void CGameStateRun::OnBeginState()
 	const int HITS_LEFT_Y = 0;
 	const int BACKGROUND_X = 0;
 	const int ANIMATION_SPEED = 15;
+	
 	//
-	diamond[0].SetMapXY(37, 21);
-	diamond[0].SetIsAlive(true);
+	diamond[1][0].SetMapXY(37, 21);
+	diamond[1][0].SetIsAlive(true);
 
-	diamond[1].SetMapXY(18, 19);
-	diamond[1].SetIsAlive(true);
+	diamond[1][1].SetMapXY(18, 19);
+	diamond[1][1].SetIsAlive(true);
 
-	diamond[2].SetMapXY(16, 17);
-	diamond[2].SetIsAlive(true);
+	diamond[1][2].SetMapXY(16, 17);
+	diamond[1][2].SetIsAlive(true);
 
-	diamond[3].SetMapXY(4, 27);
-	diamond[3].SetIsAlive(true);
+	diamond[1][3].SetMapXY(4, 27);
+	diamond[1][3].SetIsAlive(true);
 
-	diamond[4].SetMapXY(16, 28);
-	diamond[4].SetIsAlive(true);
+	diamond[1][4].SetMapXY(16, 28);
+	diamond[1][4].SetIsAlive(true);
 	//
 	character.Initialize();
 	background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
@@ -231,6 +231,7 @@ void CGameStateRun::OnBeginState()
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
+	const int NUMDIAMOND = 5;	// 鑽石的總數
 	//
 	// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
 	//
@@ -239,11 +240,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	// 移動主角
 	// 
-	character.OnMove(&gamemap[MapNumber],&MapNumber);
+	character.OnMove(&gamemap[MapNumber], &MapNumber, &counter);
 	//
 	for (int i = 0; i < NUMDIAMOND; i++)
-		if (diamond[i].IsAlive() && diamond[i].HitCharacter(&character)) {
-			diamond[i].SetIsAlive(false);
+		if (diamond[MapNumber][i].IsAlive() && diamond[MapNumber][i].HitCharacter(&character)) {
+			diamond[MapNumber][i].SetIsAlive(false);
 			counter.Add(1);
 		}
 	//
@@ -252,6 +253,8 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
+	const int NUMDIAMOND = 5;	// 鑽石的總數
+	const int NUMMAP = 5;		// 地圖數量
 	//
 	// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
 	//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
@@ -262,8 +265,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	//
 	counter.LoadBitmap();
 	character.LoadBitmap();
-	for (int i = 0; i < NUMDIAMOND; i++)
-		diamond[i].LoadBitmap();
+	for(int j=0;j<NUMMAP;j++)
+		for (int i = 0; i < NUMDIAMOND; i++)
+			diamond[j][i].LoadBitmap();
 	background.LoadBitmap("RES\\Background.bmp");					// 載入背景的圖形
 	//
 	// 完成部分Loading動作，提高進度
@@ -351,6 +355,7 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 
 void CGameStateRun::OnShow()
 {
+	const int NUMDIAMOND = 5;	// 鑽石的總數
 	//
 	//  注意：Show裡面千萬不要移動任何物件的座標，移動座標的工作應由Move做才對，
 	//        否則當視窗重新繪圖時(OnDraw)，物件就會移動，看起來會很怪。換個術語
@@ -366,11 +371,9 @@ void CGameStateRun::OnShow()
 	GameMap->OnShow(MapNumber);
 	character.OnShow(GameMap);					// 貼上擦子
 	//
-	if (MapNumber == 1) {
-		for (int i = 0; i < NUMDIAMOND; i++)
-			diamond[i].OnShow(GameMap);				// 貼上第i號
+	for (int i = 0; i < NUMDIAMOND; i++)
+		diamond[MapNumber][i].OnShow(GameMap);				// 貼上第i號
 
-	}
 	//for (int i = 0; i < NUMDIAMOND; i++)
 	//	diamond[i].OnShow(GameMap);				// 貼上第i號
 

@@ -1,3 +1,5 @@
+#pragma once
+#include"Map.h"
 namespace game_framework{
 	class Counter
 	{
@@ -7,6 +9,7 @@ namespace game_framework{
 		void OnShow(Map*);								// 將圖形貼到畫面
 		void SetMapXY(Map*);							// 設定圓心的座標
 		void Add(int n);								// 增加整數值
+		void ResetDiamondCount();
 	protected:
 		CAnimation oneDiamond;		// 動畫1
 		CAnimation twoDiamond;		// 動畫2

@@ -4,7 +4,6 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
-#include "Map.h"
 #include "Counter.h"
 
 namespace game_framework {
@@ -49,5 +48,9 @@ namespace game_framework {
 	void Counter::Add(int n)
 	{
 		DiamondCount += n;
+	}
+	void Counter::ResetDiamondCount()
+	{
+		DiamondCount = 0;
 	}
 }

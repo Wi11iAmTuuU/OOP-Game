@@ -5,7 +5,6 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "CCharacter.h"
-#include "Map.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -72,7 +71,7 @@ namespace game_framework {
 		//
 	}
 
-	void CCharacter::OnMove(Map *m,int *MapNumber)
+	void CCharacter::OnMove(Map *m,int *MapNumber,Counter *counter)
 	{
 		const int STEP_SIZE = 5;
 		int i, j;
@@ -114,7 +113,7 @@ namespace game_framework {
 		}
 		if (isMovingRight && !isMovingDown) {
 			for (i = 0; i < animation.Height(); i++) {   //判斷往右邊走兩個有沒有撞到障礙物
-				if ((m->GetBlock(x - 5, y + i) != 0) && (m->GetBlock(x - 5, y + i) != 11) && (m->GetBlock(x - 5, y + i) != 12)) {
+				if ((m->GetBlock(x + animation.Width() + 5, y + i) != 0) && (m->GetBlock(x + animation.Width() + 5, y + i) != 11) && (m->GetBlock(x + animation.Width() + 5, y + i) != 12)) {
 					break;
 				}
 			}
@@ -244,9 +243,11 @@ namespace game_framework {
 		{
 			if (m->GetBlock(x, y) == 11) {
 				*MapNumber = 1;
+				counter->ResetDiamondCount();
 			}
 			else if (m->GetBlock(x, y) == 12) {
 				*MapNumber = 0;
+				counter->ResetDiamondCount();
 			}
 		}
 		//

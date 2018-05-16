@@ -52,8 +52,7 @@ namespace game_framework {
 		const int Y_POS = 1125;
 		x = X_POS;
 		y = Y_POS;
-		isMovingLeft = isMovingRight = isMovingJump = isMovingDown = false;
-		isMovingFly = false;
+		isMovingLeft = isMovingRight = isMovingJump = isMovingDown = isMovingUp = false;
 	}
 
 	void CCharacter::LoadBitmap()
@@ -80,7 +79,7 @@ namespace game_framework {
 		if (isMovingLeft && !isMovingDown) {
 			for (i = 0; i < animation.Height(); i++) {  //判斷往左邊走兩個格有沒有撞到障礙物
 				if ((m->GetBlock(x - 5, y + i) != 0) && (m->GetBlock(x - 5, y + i) != 11) && (m->GetBlock(x - 5, y + i) != 12)) {
-					break;
+					break;  //判斷方塊如果是 0 11 12 就跳出迴圈
 				}
 			}
 			if (i == animation.Height()) {
@@ -96,12 +95,8 @@ namespace game_framework {
 			}
 			if (!IsJumping) {
 				for (j = 0; j < animation.Width(); j++) {  //判斷往左走時下方有沒有東西且不是跳躍的時候
-					/*if (!(m->isEmpty(x + j, y + animation.Height() + 1))) {
-						Isfalling = false;
-						break;
-					}*/
 					if ((m->GetBlock(x + j, y + animation.Height() + 1) != 0) && (m->GetBlock(x + j, y + animation.Height() + 1) != 11) && (m->GetBlock(x + j, y + animation.Height() + 1) != 12)) {
-						Isfalling = false;
+						Isfalling = false; //判斷方塊如果是 0 11 12 就跳出迴圈
 						break;
 					}
 					else if (!Isfalling) {
@@ -114,8 +109,8 @@ namespace game_framework {
 		}
 		if (isMovingRight && !isMovingDown) {
 			for (i = 0; i < animation.Height(); i++) {   //判斷往右邊走兩個有沒有撞到障礙物
-				if ((m->GetBlock(x - 5, y + i) != 0) && (m->GetBlock(x - 5, y + i) != 11) && (m->GetBlock(x - 5, y + i) != 12)) {
-					break;
+				if ((m->GetBlock(x + animation.Width() + 5, y + i) != 0) && (m->GetBlock(x + animation.Width() + 5, y + i) != 11) && (m->GetBlock(x + animation.Width() + 5, y + i) != 12)) {
+					break; //判斷方塊如果是 0 11 12 就跳出迴圈
 				}
 			}
 			if (i == animation.Height()) {
@@ -131,12 +126,8 @@ namespace game_framework {
 			}
 			if (!IsJumping) {
 				for (j = 0; j < animation.Width(); j++) {  //判斷往右走時下方有沒有東西且不是跳躍的時候
-					/*if (!(m->isEmpty(x + j, y + animation.Height() + 1))) {
-						Isfalling = false;
-						break;
-					}*/
 					if ((m->GetBlock(x + j, y + animation.Height() + 1) != 0) && (m->GetBlock(x + j, y + animation.Height() + 1) != 11) && (m->GetBlock(x + j, y + animation.Height() + 1) != 12)) {
-						Isfalling = false;
+						Isfalling = false; //判斷方塊如果是 0 11 12 就跳出迴圈
 						break;
 					}
 					else if (!Isfalling) {
@@ -188,13 +179,8 @@ namespace game_framework {
 				if (velocity > 0) {
 					for (i = 0; i < animation.Width(); i++) {  //上升時判斷上方是否有碰撞到東西
 						for (j = 0; j < velocity; j++) {
-							/*if (!(m->isEmpty(x + i, y - j))) {
-								rising = false;
-								velocity = 1;
-								break;
-							}*/
 							if ((m->GetBlock(x + i, y - j) != 0) && (m->GetBlock(x + i, y - j) != 11) && (m->GetBlock(x + i, y - j) != 12)) {
-								rising = false;
+								rising = false; //判斷方塊如果是 0 11 12 就跳出迴圈
 								velocity = 1;
 								break;
 							}
@@ -214,16 +200,8 @@ namespace game_framework {
 			else {				// 下降狀態
 				for (i = 0; i < animation.Width(); i++) {
 					for (j = 0; j < velocity; j++) {
-						//if (!(m->isEmpty(x + i, y + animation.Height() + j))) {  //判斷人物下方是不是有障礙物
-						//	y = y + j;
-						//	rising = true;
-						//	velocity = initial_velocity;	// 重設上升初始速度
-						//	IsJumping = false;				// 跳躍狀態結束
-						//	IsJumpTwice = false;
-						//	break;
-						//}
 						if ((m->GetBlock(x + i, y + animation.Height() + j) != 0) && (m->GetBlock(x + i, y + animation.Height() + j) != 11) && (m->GetBlock(x + i, y + animation.Height() + j) != 12)) {
-							y = y + j;
+							y = y + j;						//判斷方塊如果是 0 11 12 就跳出迴圈
 							rising = true;
 							velocity = initial_velocity;	// 重設上升初始速度
 							IsJumping = false;				// 跳躍狀態結束
@@ -240,13 +218,17 @@ namespace game_framework {
 			}
 		}
 		//
-		if (isMovingFly)
+		if (isMovingUp)
 		{
-			if (m->GetBlock(x, y) == 11) {
+			if (m->GetBlock(x, y) == 11) {  //判斷是不是門
 				*MapNumber = 1;
+				x = 960;
+				y = 1125;
 			}
 			else if (m->GetBlock(x, y) == 12) {
 				*MapNumber = 0;
+				x = 960;
+				y = 1125;
 			}
 		}
 		//
@@ -272,9 +254,9 @@ namespace game_framework {
 		isMovingDown = flag;
 	}
 
-	void CCharacter::SetMovingFly(bool flag)
+	void CCharacter::SetMovingUp(bool flag)
 	{
-		isMovingFly = flag;
+		isMovingUp = flag;
 	}
 
 	void CCharacter::SetXY(int nx, int ny)

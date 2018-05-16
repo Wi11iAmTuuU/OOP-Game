@@ -223,7 +223,7 @@ void CGameStateRun::OnBeginState()
 	background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	GameMap = &gamemap[MapNumber];
-	GameMap->ReadMap(MapNumber);                               // 設定起始座標
+	GameMap->ReadMap(MapNumber);                             
 	// 音樂 //
 	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 	
@@ -301,7 +301,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	if (nChar == KEY_DOWN)
 		character.SetMovingDown(true);
 	if (nChar == KEY_UP)
-		character.SetMovingFly(true);
+		character.SetMovingUp(true);
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -320,7 +320,7 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	if (nChar == KEY_DOWN)
 		character.SetMovingDown(false);
 	if (nChar == KEY_UP)
-		character.SetMovingFly(false);
+		character.SetMovingUp(false);
 }
 
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作

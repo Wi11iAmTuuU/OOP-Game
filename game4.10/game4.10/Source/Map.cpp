@@ -154,12 +154,4 @@ namespace game_framework {
 	{
 		return sy;
 	}
-	//int Map::GetMapNumber()
-	//{
-	//	return MapNumber;
-	//}
-	//void Map::ChangeMapNumber(int index)
-	//{
-	//	MapNumber = index;
-	//}
 }

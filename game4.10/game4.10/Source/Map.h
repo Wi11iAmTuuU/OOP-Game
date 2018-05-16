@@ -23,8 +23,6 @@ namespace game_framework
 		bool isEmpty(int x, int y);         // 判斷碰壁;
 		int	 Getsx();						// 計數器用
 		int	 Getsy();						// 計數器用
-		//int  GetMapNumber();				// 取的地圖編號
-		//void ChangeMapNumber(int);             //改變地圖編號
 	protected:
 		CMovingBitmap background;			// 地圖
 		CMovingBitmap Normalblock;			//顯示一般方塊
@@ -34,6 +32,5 @@ namespace game_framework
 	private:
 		int sx, sy;							// 左上角座標
 		int Map1[30][40] = { 0 };   // 1 = 一般方塊 2 = 減速方塊 3 = 加速方塊 11 = 門
-
 	};
 }

@@ -77,17 +77,6 @@ namespace game_framework {
 	// 這個class為遊戲的遊戲執行物件，主要的遊戲程式都在這裡
 	// 每個Member function的Implementation都要弄懂
 	/////////////////////////////////////////////////////////////////////////////
-	/*class MapPractice {
-	public:
-		MapPractice();
-		void LoadBitmap();
-		void OnShow();
-	protected:
-		CMovingBitmap brown;
-		int Bmap[10];
-		const int X, Y;
-	};*/
-
 
 	class CGameStateRun : public CGameState {
 	public:
@@ -114,8 +103,8 @@ namespace game_framework {
 		CDiamond		*diamond;	// 鑽石
 		CCharacter		character;	// 拍子
 		Counter			counter;	// 計數器
-		Map	gamemap[5];
-		Map *GameMap;
+		Map	gamemap[5];             // 全部地圖
+		Map *GameMap;				//角色所在的地圖
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

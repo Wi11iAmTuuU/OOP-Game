@@ -23,7 +23,7 @@ namespace game_framework {
 		void SetMovingJump(bool flag);	// 設定是否正在往上移動
 		void SetMovingDown(bool flag);	// 設定是否正在往下移動
 		//
-		void SetMovingFly(bool flag);	// 設定是否正在往下移動
+		void SetMovingUp(bool flag);	// 設定是否正在往下移動
 		//
 		void SetXY(int nx, int ny);		// 設定擦子左上角座標
 		int  GetMapNumber();				// 取的地圖編號
@@ -45,11 +45,10 @@ namespace game_framework {
 		bool IsJumpTwice;		// true表已二段跳、false表未二段跳
 		bool Isfalling;
 		//
-		bool isMovingFly;
-		//
 		bool isMovingLeft;			// 是否正在往左移動
 		bool isMovingRight;			// 是否正在往右移動
 		bool isMovingJump;			// 是否正在往上移動
 		bool isMovingDown;			// 是否正在往下移動
+		bool isMovingUp;            //是否往下個地圖移動
 	};
 }

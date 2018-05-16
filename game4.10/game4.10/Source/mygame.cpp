@@ -194,14 +194,7 @@ void CGameStateInit::OnShow()
 	
 void CGameStateRun::OnBeginState()
 {
-	const int BALL_GAP = 90;
-	const int BALL_XY_OFFSET = 45;
-	const int BALL_PER_ROW = 7;
-	const int HITS_LEFT = 10;
-	const int HITS_LEFT_X = 590;
-	const int HITS_LEFT_Y = 0;
 	const int BACKGROUND_X = 0;
-	const int ANIMATION_SPEED = 15;
 	
 	//
 	diamond[1][0].SetMapXY(37, 21);
@@ -248,6 +241,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			counter.Add(1);
 		}
 	//
+	if (MapNumber != 1)
+		for (int i = 0; i < NUMDIAMOND; i++)
+			diamond[1][i].SetIsAlive(true);
 	GameMap->OnMove(character.GetX1(), character.GetY1());
 }
 
@@ -291,11 +287,12 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	const char KEY_LEFT  = 0x25; // keyboard左箭頭
+	const char KEY_LEFT = 0x25; // keyboard左箭頭
 	const char KEY_SPACE = 0x20; // keyboard空白鍵
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
-	const char KEY_DOWN  = 0x28; // keyboard下箭頭
-	const char KEY_UP	 = 0x26; // keyboard上箭頭
+	const char KEY_DOWN = 0x28; // keyboard下箭頭
+	const char KEY_UP = 0x26; // keyboard上箭頭
+	const char KEY_Q = 0x51; // keyboard上箭頭
 	if (nChar == KEY_LEFT)
 		character.SetMovingLeft(true);
 	if (nChar == KEY_RIGHT)
@@ -306,15 +303,18 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		character.SetMovingDown(true);
 	if (nChar == KEY_UP)
 		character.SetMovingUp(true);
+	if (nChar == KEY_Q)
+		character.SetMovingDie(true);
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	const char KEY_LEFT  = 0x25; // keyboard左箭頭
+	const char KEY_LEFT = 0x25; // keyboard左箭頭
 	const char KEY_SPACE = 0x20; // keyboard空白鍵
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
-	const char KEY_DOWN	 = 0x28; // keyboard下箭頭
+	const char KEY_DOWN = 0x28; // keyboard下箭頭
 	const char KEY_UP = 0x26; // keyboard上箭頭
+	const char KEY_Q = 0x51; // keyboard上箭頭
 	if (nChar == KEY_LEFT)
 		character.SetMovingLeft(false);
 	if (nChar == KEY_RIGHT)
@@ -325,6 +325,8 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 		character.SetMovingDown(false);
 	if (nChar == KEY_UP)
 		character.SetMovingUp(false);
+	if (nChar == KEY_Q)
+		character.SetMovingDie(false);
 }
 
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作

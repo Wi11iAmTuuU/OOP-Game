@@ -4,7 +4,6 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
-#include "CCharacter.h"
 #include "CDiamond.h"
 
 namespace game_framework {

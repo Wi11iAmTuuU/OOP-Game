@@ -22,6 +22,9 @@ namespace game_framework {
 		velocity = initial_velocity;
 		IsJumping = false;
 		Isfalling = false;
+		IsDieing = false;
+		IsReliving = false;
+		dieCounter = 0;
 		//
 	}
 
@@ -51,7 +54,7 @@ namespace game_framework {
 		const int Y_POS = 1125;
 		x = X_POS;
 		y = Y_POS;
-		isMovingLeft = isMovingRight = isMovingJump = isMovingDown = isMovingUp = false;
+		isMovingLeft = isMovingRight = isMovingJump = isMovingDown = isMovingUp = isMovingDie = false;
 	}
 
 	void CCharacter::LoadBitmap()
@@ -68,6 +71,25 @@ namespace game_framework {
 		animation_Left.AddBitmap("RES\\Character\\CharacterW2L.bmp", RGB(255, 255, 255));
 		animation_Left.AddBitmap("RES\\Character\\CharacterL.bmp", RGB(255, 255, 255));
 		//
+		animation_Die.AddBitmap("RES\\Character\\CharacterDie1.bmp", RGB(255, 255, 255));
+		animation_Die.AddBitmap("RES\\Character\\CharacterDie2.bmp", RGB(255, 255, 255));
+		animation_Die.AddBitmap("RES\\Character\\Character1.bmp", RGB(255, 255, 255));
+		animation_Die.AddBitmap("RES\\Character\\CharacterDie1.bmp", RGB(255, 255, 255));
+		animation_Die.AddBitmap("RES\\Character\\CharacterDie2.bmp", RGB(255, 255, 255));
+		animation_Die.AddBitmap("RES\\Character\\Character1.bmp", RGB(255, 255, 255));
+		animation_Die.AddBitmap("RES\\Character\\CharacterDie1.bmp", RGB(255, 255, 255));
+		animation_Die.AddBitmap("RES\\Character\\CharacterDie2.bmp", RGB(255, 255, 255));
+		animation_Die.AddBitmap("RES\\Character\\Character1.bmp", RGB(255, 255, 255));
+		animation_Die.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
+		animation_Die.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
+		animation_Die.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
+		//
+		animation_relive.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
+		animation_relive.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
+		animation_relive.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
+		animation_relive.AddBitmap("RES\\Character\\CharacterDie2.bmp", RGB(255, 255, 255));
+		animation_relive.AddBitmap("RES\\Character\\CharacterDie1.bmp", RGB(255, 255, 255));
+		animation_relive.AddBitmap("RES\\Character\\Character1.bmp", RGB(255, 255, 255));
 	}
 
 	void CCharacter::OnMove(Map *m, int *MapNumber, Counter *counter)
@@ -87,6 +109,15 @@ namespace game_framework {
 				}
 				else if (((m->GetBlock(x, y + animation.Height() + 2) == 3)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 3))) {
 					x -= 8;
+				}
+				else if (((m->GetBlock(x, y + animation.Height() + 2) == 10)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 10))) {
+					if (m->GetBlock(x, y + animation.Height() + 2) == 10) {
+						m->SetCheckpoint(x, y + animation.Height() + 2);
+					}
+					if (m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 10) {
+						m->SetCheckpoint(x + animation.Width(), y + animation.Height() + 2);
+					}
+					x -= STEP_SIZE;
 				}
 				else {
 					x -= STEP_SIZE;
@@ -118,6 +149,15 @@ namespace game_framework {
 				}
 				else if (((m->GetBlock(x, y + animation.Height() + 2) == 3)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 3))) {
 					x += 8;
+				}
+				else if (((m->GetBlock(x, y + animation.Height() + 2) == 10)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 10))) {
+					if (m->GetBlock(x, y + animation.Height() + 2) == 10) {
+						m->SetCheckpoint(x, y + animation.Height() + 2);
+					}
+					if (m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 10) {
+						m->SetCheckpoint(x + animation.Width(), y + animation.Height() + 2);
+					}
+					x += STEP_SIZE;
 				}
 				else {
 					x += STEP_SIZE;
@@ -216,6 +256,30 @@ namespace game_framework {
 				}
 			}
 		}
+		if (isMovingDie) {									//¦º¤`¤F³á	
+			IsDieing = true;
+		}
+		if (IsDieing) {
+			if (dieCounter < 12) {
+				dieCounter++;
+			}
+			else {
+				dieCounter = 0;
+				IsReliving = true;
+				IsDieing = false;
+				x = m->GetCheckpointX() * 48 + 3;
+				y = (m->GetCheckpointY() - 1) * 40 + 5;
+			}
+		}
+		if (IsReliving) {
+			if (dieCounter  < 5) {
+				dieCounter++;
+			}
+			else {
+				dieCounter = 0;
+				IsReliving = false;
+			}
+		}
 		//
 		if (isMovingUp)
 		{
@@ -274,6 +338,11 @@ namespace game_framework {
 		isMovingDown = flag;
 	}
 
+	void CCharacter::SetMovingDie(bool flag)
+	{
+		isMovingDie = flag;
+	}
+
 	void CCharacter::SetMovingUp(bool flag)
 	{
 		isMovingUp = flag;
@@ -309,6 +378,16 @@ namespace game_framework {
 			animation_right.SetTopLeft(m->ScreenX(x), m->ScreenY(y));
 			animation_right.OnShow();
 			animation_right.OnMove();
+		}
+		else if (IsDieing) {
+			animation_Die.SetTopLeft(m->ScreenX(x), m->ScreenY(y));
+			animation_Die.OnShow();
+			animation_Die.OnMove();
+		}
+		else if (IsReliving) {
+			animation_relive.SetTopLeft(m->ScreenX(x), m->ScreenY(y));
+			animation_relive.OnShow();
+			animation_relive.OnMove();
 		}
 		else
 		{

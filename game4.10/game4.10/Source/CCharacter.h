@@ -1,5 +1,6 @@
 #pragma once
 #include"Map.h"
+#include "Counter.h"
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class提供可以用鍵盤或滑鼠控制的擦子
@@ -10,30 +11,36 @@ namespace game_framework {
 	{
 	public:
 		CCharacter();
-		int  GetX1();					// 擦子左上角 x 座標
-		int  GetY1();					// 擦子左上角 y 座標
-		int  GetX2();					// 擦子右下角 x 座標
-		int  GetY2();					// 擦子右下角 y 座標
-		void Initialize();				// 設定擦子為初始值
-		void LoadBitmap();				// 載入圖形
-		void OnMove(Map*,int*);					// 移動擦子
+		int  GetX1();						// 擦子左上角 x 座標
+		int  GetY1();						// 擦子左上角 y 座標
+		int  GetX2();						// 擦子右下角 x 座標
+		int  GetY2();						// 擦子右下角 y 座標
+		void Initialize();					// 設定擦子為初始值
+		void LoadBitmap();					// 載入圖形
+		void OnMove(Map*, int*, Counter*);	// 移動擦子
 		void OnShow(Map*);					// 將擦子圖形貼到畫面
-		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
-		void SetMovingRight(bool flag); // 設定是否正在往右移動
-		void SetMovingJump(bool flag);	// 設定是否正在往上移動
-		void SetMovingDown(bool flag);	// 設定是否正在往下移動
+		void SetMovingLeft(bool flag);		// 設定是否正在往左移動
+		void SetMovingRight(bool flag);		// 設定是否正在往右移動
+		void SetMovingJump(bool flag);		// 設定是否正在往上移動
+		void SetMovingDown(bool flag);		// 設定是否正在往下移動
 		//
+<<<<<<< HEAD
 		void SetMovingUp(bool flag);	// 設定是否正在往下移動
 		//
 		void SetXY(int nx, int ny);		// 設定擦子左上角座標
+=======
+		void SetMovingFly(bool flag);		// 設定是否正在往下移動
+		//	
+		void SetXY(int nx, int ny);			// 設定擦子左上角座標
+>>>>>>> 9a08880d0f1359f6b99f6f88b21953553ca0107c
 		int  GetMapNumber();				// 取的地圖編號
-		void ChangeMapNumber(int);             //改變地圖編號
+		void ChangeMapNumber(int);           //改變地圖編號
 	protected:
-		CAnimation animation;		// 擦子的動畫
+		CAnimation animation;				// 擦子的動畫
 		CAnimation animation_Underarm;		// 擦子的動畫
-		CAnimation animation_Left;		// 擦子的動畫
-		CAnimation animation_right;		// 擦子的動畫
-		int x, y;					// 擦子左上角座標
+		CAnimation animation_Left;			// 擦子的動畫
+		CAnimation animation_right;			// 擦子的動畫
+		int x, y;							// 擦子左上角座標
 		int MapNumber;
 		//
 		int floor;				// 地板的Y座標

@@ -95,6 +95,7 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
+<<<<<<< HEAD
 		const int		NUMDIAMOND;	// 鑽石的總數
 		int				MapNumber;  // 地圖編號
 		CMovingBitmap	background;	// 背景圖
@@ -105,6 +106,17 @@ namespace game_framework {
 		Counter			counter;	// 計數器
 		Map	gamemap[5];             // 全部地圖
 		Map *GameMap;				//角色所在的地圖
+=======
+		int				MapNumber;						// 地圖編號
+		CMovingBitmap	background;						// 背景圖
+		CMovingBitmap	help;							// 說明圖
+		CMovingBitmap	corner;							// 角落圖
+		CDiamond		diamond[5][5];					// 鑽石[關卡數][鑽石數]
+		CCharacter		character;						// 拍子
+		Counter			counter;						// 計數器
+		Map	gamemap[5];
+		Map *GameMap;
+>>>>>>> 9a08880d0f1359f6b99f6f88b21953553ca0107c
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

@@ -20,9 +20,12 @@ namespace game_framework
 		void OnMove(int, int);              // 地圖移動
 		void OnShow(int);						// 將圖形貼到畫面
 		void SetXY(int nx, int ny);         // 設定螢幕畫面左上角的座標
+		void SetCheckpoint(int, int);		// 設定記錄點座標
 		bool isEmpty(int x, int y);         // 判斷碰壁;
 		int	 Getsx();						// 計數器用
 		int	 Getsy();						// 計數器用
+		int	 GetCheckpointX();				// 記錄點用
+		int	 GetCheckpointY();				// 記錄點用
 		//int  GetMapNumber();				// 取的地圖編號
 		//void ChangeMapNumber(int);             //改變地圖編號
 	protected:
@@ -32,10 +35,12 @@ namespace game_framework
 		CMovingBitmap SpeedBlock;			//顯示加速方塊
 		CMovingBitmap AutoSpeedBlockRight;  //顯示往右自動方塊
 		CMovingBitmap AutoSpeedBlockLeft;  //顯示往左自動方塊
+		CMovingBitmap CheckpointBlock;		//顯示記錄點方塊
+		CMovingBitmap LightCheckpointBlock; //顯示記錄點方塊(開啟)
 		CMovingBitmap door;                 //顯示門
 	private:
 		int sx, sy;							// 左上角座標
 		int Map1[30][40] = { 0 };   // 1 = 一般方塊 2 = 減速方塊 3 = 加速方塊 11 = 門
-
+		int CheckpointX, CheckpointY;
 	};
 }

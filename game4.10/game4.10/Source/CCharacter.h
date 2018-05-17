@@ -17,16 +17,17 @@ namespace game_framework {
 		int  GetY2();						// 擦子右下角 y 座標
 		void Initialize();					// 設定擦子為初始值
 		void LoadBitmap();					// 載入圖形
+		void SetXY(int nx, int ny);			// 設定擦子左上角座標
 		void OnMove(Map*, int*, Counter*);	// 移動擦子
 		void OnShow(Map*);					// 將擦子圖形貼到畫面
 		void SetMovingLeft(bool flag);		// 設定是否正在往左移動
 		void SetMovingRight(bool flag);		// 設定是否正在往右移動
 		void SetMovingJump(bool flag);		// 設定是否正在往上移動
 		void SetMovingDown(bool flag);		// 設定是否正在往下移動
+		void SetMovingDie(bool flag);		// 設定是否正在自殺
 		//
 		void SetMovingUp(bool flag);		// 設定是否正在往下移動
-		//	
-		void SetXY(int nx, int ny);			// 設定擦子左上角座標
+		//
 		int  GetMapNumber();				// 取的地圖編號
 		void ChangeMapNumber(int);           //改變地圖編號
 	protected:
@@ -34,7 +35,10 @@ namespace game_framework {
 		CAnimation animation_Underarm;		// 擦子的動畫
 		CAnimation animation_Left;			// 擦子的動畫
 		CAnimation animation_right;			// 擦子的動畫
+		CAnimation animation_Die;			// 擦子的動畫
+		CAnimation animation_relive;		// 擦子的動畫
 		int x, y;							// 擦子左上角座標
+
 		int MapNumber;
 		//
 		int floor;				// 地板的Y座標
@@ -42,9 +46,12 @@ namespace game_framework {
 		bool falling;           // true表下降、false表上升
 		int initial_velocity;	// 初始速度
 		int velocity;			// 目前的速度(點/次)
+		int dieCounter;			// 死亡計數
 		bool IsJumping;			// true表跳耀、false表非跳耀
 		bool IsJumpTwice;		// true表已二段跳、false表未二段跳
 		bool Isfalling;
+		bool IsDieing;
+		bool IsReliving;
 		//
 		bool isMovingUp;
 		//
@@ -52,5 +59,6 @@ namespace game_framework {
 		bool isMovingRight;			// 是否正在往右移動
 		bool isMovingJump;			// 是否正在往上移動
 		bool isMovingDown;			// 是否正在往下移動
+		bool isMovingDie;			// 是否正在自殺
 	};
 }

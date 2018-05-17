@@ -64,12 +64,14 @@ namespace game_framework {
 	void Map::LoadBitmap() //載入圖片
 	{
 		background.LoadBitmap(IDB_BACKGROUND);
-		Normalblock.LoadBitmap("RES\\normalblock.bmp", RGB(255, 255, 255));
-		LoseSpeedBlock.LoadBitmap("RES\\LosespeedBlock.bmp", RGB(255, 255, 255));
-		SpeedBlock.LoadBitmap("RES\\SpeedBlock.bmp", RGB(255, 255, 255));
-		AutoSpeedBlockRight.LoadBitmap("RES\\AutoSpeedBlockRight.bmp", RGB(255, 255, 255));
-		AutoSpeedBlockLeft.LoadBitmap("RES\\AutoSpeedBlockLeft.bmp", RGB(255, 255, 255));
-		door.LoadBitmap("RES\\door.bmp", RGB(255, 255, 255));
+		Normalblock.LoadBitmap("RES\\Block\\normalblock.bmp", RGB(255, 255, 255));
+		LoseSpeedBlock.LoadBitmap("RES\\Block\\LosespeedBlock.bmp", RGB(255, 255, 255));
+		SpeedBlock.LoadBitmap("RES\\Block\\SpeedBlock.bmp", RGB(255, 255, 255));
+		AutoSpeedBlockRight.LoadBitmap("RES\\Block\\AutoSpeedBlockRight.bmp", RGB(255, 255, 255));
+		AutoSpeedBlockLeft.LoadBitmap("RES\\Block\\AutoSpeedBlockLeft.bmp", RGB(255, 255, 255));
+		LightCheckpointBlock.LoadBitmap("RES\\Block\\LightCheckpointBlock.bmp", RGB(255, 255, 255));
+		CheckpointBlock.LoadBitmap("RES\\Block\\CheckpointBlock.bmp", RGB(255, 255, 255));
+		door.LoadBitmap("RES\\Block\\door.bmp", RGB(255, 255, 255));
 	}
 
 	void Map::OnMove(int x, int y)
@@ -139,6 +141,17 @@ namespace game_framework {
 						door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
 						door.ShowBitmap();
 						break;
+					case 10:
+						if (i == CheckpointY && j == CheckpointX) {
+							LightCheckpointBlock.SetTopLeft(x, y);
+							LightCheckpointBlock.ShowBitmap();
+						}
+						else
+						{
+							CheckpointBlock.SetTopLeft(x, y);
+							CheckpointBlock.ShowBitmap();
+						}
+						break;
 					}
 				}
 			}
@@ -148,6 +161,11 @@ namespace game_framework {
 	{
 		sx = nx;
 		sy = ny;
+	}
+	void Map::SetCheckpoint(int X, int Y)
+	{
+		CheckpointX = X / 48; // 轉換為X軸格座標(整數除法)
+		CheckpointY = Y / 40; // 轉換為Y軸格座標(整數除法)
 	}
 	bool Map::isEmpty(int x, int y)
 	{
@@ -163,6 +181,14 @@ namespace game_framework {
 	int Map::Getsy()
 	{
 		return sy;
+	}
+	int Map::GetCheckpointX()
+	{
+		return CheckpointX;
+	}
+	int Map::GetCheckpointY()
+	{
+		return CheckpointY;
 	}
 	//int Map::GetMapNumber()
 	//{

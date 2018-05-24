@@ -72,6 +72,7 @@ namespace game_framework {
 		LightCheckpointBlock.LoadBitmap("RES\\Block\\LightCheckpointBlock.bmp", RGB(255, 255, 255));
 		CheckpointBlock.LoadBitmap("RES\\Block\\CheckpointBlock.bmp", RGB(255, 255, 255));
 		door.LoadBitmap("RES\\Block\\door.bmp", RGB(255, 255, 255));
+		WaterBlock.LoadBitmap("RES\\Block\\waterblock.bmp", RGB(255, 255, 255));
 	}
 
 	void Map::OnMove(int x, int y)
@@ -137,6 +138,10 @@ namespace game_framework {
 						AutoSpeedBlockLeft.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
 						AutoSpeedBlockLeft.ShowBitmap();
 						break;
+					case 9:
+						WaterBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+						WaterBlock.ShowBitmap();
+						break;
 					case 12:
 						door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
 						door.ShowBitmap();
@@ -190,12 +195,4 @@ namespace game_framework {
 	{
 		return CheckpointY;
 	}
-	//int Map::GetMapNumber()
-	//{
-	//	return MapNumber;
-	//}
-	//void Map::ChangeMapNumber(int index)
-	//{
-	//	MapNumber = index;
-	//}
 }

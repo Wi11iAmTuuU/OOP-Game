@@ -185,7 +185,8 @@ void CGameStateInit::OnShow()
 	CGameStateRun::CGameStateRun(CGame *g)
 		: CGameState(g), MapNumber(0)
 	{
-		
+		gamemap[0].SetCheckpoint(960, 1160);
+		gamemap[1].SetCheckpoint(960, 1160);
 	}
 
 	CGameStateRun::~CGameStateRun()
@@ -241,9 +242,11 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 			counter.Add(1);
 		}
 	//
-	if (MapNumber != 1)
+	if (MapNumber != 1) {
 		for (int i = 0; i < NUMDIAMOND; i++)
 			diamond[1][i].SetIsAlive(true);
+		gamemap[1].SetCheckpoint(960,1125);
+	}
 	GameMap->OnMove(character.GetX1(), character.GetY1());
 }
 

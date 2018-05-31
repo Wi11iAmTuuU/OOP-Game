@@ -345,7 +345,7 @@ void CMovingBitmap::LoadBitmap(int IDB_BITMAP, COLORREF color)
 	SurfaceID = CDDraw::RegisterBitmap(IDB_BITMAP, color);
 	isBitmapLoaded = true;
 }
- 
+
 void CMovingBitmap::LoadBitmap(char *filename, COLORREF color)
 {
 	const int nx = 0;

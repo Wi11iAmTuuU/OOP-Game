@@ -43,95 +43,98 @@
 #include "Counter.h"
 #include "Map.h"
 #include "CDiamond.h"
+#include "GameStartview.h"
 
-namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// Constants
-	/////////////////////////////////////////////////////////////////////////////
+namespace game_framework
+{
+/////////////////////////////////////////////////////////////////////////////
+// Constants
+/////////////////////////////////////////////////////////////////////////////
 
-	enum AUDIO_ID {				// 定義各種音效的編號
-		AUDIO_DING,				// 0
-		AUDIO_LAKE,				// 1
-		AUDIO_NTUT				// 2
-	};
+enum AUDIO_ID  				// 定義各種音效的編號
+{
+	AUDIO_MENU				// 1
+};
 
-	/////////////////////////////////////////////////////////////////////////////
-	// 這個class為遊戲的遊戲開頭畫面物件
-	// 每個Member function的Implementation都要弄懂
-	/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+// 這個class為遊戲的遊戲開頭畫面物件
+// 每個Member function的Implementation都要弄懂
+/////////////////////////////////////////////////////////////////////////////
 
-	class CGameStateInit : public CGameState {
-	public:
-		CGameStateInit(CGame *g);
-		void OnInit();  								// 遊戲的初值及圖形設定
-		void OnBeginState();							// 設定每次重玩所需的變數
-		void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
-		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
-	protected:
-		void OnShow();									// 顯示這個狀態的遊戲畫面
-	private:
-		CMovingBitmap logo;								// 遊戲的logo
-	};
+class CGameStateInit : public CGameState
+{
+    public:
+        CGameStateInit(CGame* g);
+        void OnInit();  								// 遊戲的初值及圖形設定
+        void OnBeginState();							// 設定每次重玩所需的變數
+        void OnKeyDown(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
+    protected:
+        void OnShow();									// 顯示這個狀態的遊戲畫面
+		GameStartView Menu;								// Menu
+    
+};
 
-	/////////////////////////////////////////////////////////////////////////////
-	// 這個class為遊戲的遊戲執行物件，主要的遊戲程式都在這裡
-	// 每個Member function的Implementation都要弄懂
-	/////////////////////////////////////////////////////////////////////////////
-	/*class MapPractice {
-	public:
-		MapPractice();
-		void LoadBitmap();
-		void OnShow();
-	protected:
-		CMovingBitmap brown;
-		int Bmap[10];
-		const int X, Y;
-	};*/
+/////////////////////////////////////////////////////////////////////////////
+// 這個class為遊戲的遊戲執行物件，主要的遊戲程式都在這裡
+// 每個Member function的Implementation都要弄懂
+/////////////////////////////////////////////////////////////////////////////
+/*class MapPractice {
+public:
+	MapPractice();
+	void LoadBitmap();
+	void OnShow();
+protected:
+	CMovingBitmap brown;
+	int Bmap[10];
+	const int X, Y;
+};*/
 
 
-	class CGameStateRun : public CGameState {
-	public:
-		CGameStateRun(CGame *g);
-		~CGameStateRun();
-		void OnBeginState();							// 設定每次重玩所需的變數
-		void OnInit();  								// 遊戲的初值及圖形設定
-		void OnKeyDown(UINT, UINT, UINT);
-		void OnKeyUp(UINT, UINT, UINT);
-		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
-		void OnLButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
-		void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作 
-		void OnRButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
-		void OnRButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
-	protected:
-		void OnMove();									// 移動遊戲元素
-		void OnShow();									// 顯示這個狀態的遊戲畫面
-	private:
-		int				MapNumber;						// 地圖編號
-		CMovingBitmap	background;						// 背景圖
-		CMovingBitmap	help;							// 說明圖
-		CMovingBitmap	corner;							// 角落圖
-		CDiamond		diamond[5][5];					// 鑽石[關卡數][鑽石數]
-		CCharacter		character;						// 拍子
-		Counter			counter;						// 計數器
-		Map	gamemap[5];
-		Map *GameMap;
-	};
+class CGameStateRun : public CGameState
+{
+    public:
+        CGameStateRun(CGame* g);
+        ~CGameStateRun();
+        void OnBeginState();							// 設定每次重玩所需的變數
+        void OnInit();  								// 遊戲的初值及圖形設定
+        void OnKeyDown(UINT, UINT, UINT);
+        void OnKeyUp(UINT, UINT, UINT);
+        void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+        void OnLButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
+        void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作
+        void OnRButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+        void OnRButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
+    protected:
+        void OnMove();									// 移動遊戲元素
+        void OnShow();									// 顯示這個狀態的遊戲畫面
+    private:
+        int				MapNumber;						// 地圖編號
+        CMovingBitmap	background;						// 背景圖
+        CMovingBitmap	help;							// 說明圖
+        CMovingBitmap	corner;							// 角落圖
+        CDiamond		diamond[5][5];					// 鑽石[關卡數][鑽石數]
+        CCharacter		character;						// 拍子
+        Counter			counter;						// 計數器
+        Map	gamemap[5];
+        Map* GameMap;
+};
 
-	/////////////////////////////////////////////////////////////////////////////
-	// 這個class為遊戲的結束狀態(Game Over)
-	// 每個Member function的Implementation都要弄懂
-	/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+// 這個class為遊戲的結束狀態(Game Over)
+// 每個Member function的Implementation都要弄懂
+/////////////////////////////////////////////////////////////////////////////
 
-	class CGameStateOver : public CGameState {
-	public:
-		CGameStateOver(CGame *g);
-		void OnBeginState();							// 設定每次重玩所需的變數
-		void OnInit();
-	protected:
-		void OnMove();									// 移動遊戲元素
-		void OnShow();									// 顯示這個狀態的遊戲畫面
-	private:
-		int counter;	// 倒數之計數器
-	};
+class CGameStateOver : public CGameState
+{
+    public:
+        CGameStateOver(CGame* g);
+        void OnBeginState();							// 設定每次重玩所需的變數
+        void OnInit();
+    protected:
+        void OnMove();									// 移動遊戲元素
+        void OnShow();									// 顯示這個狀態的遊戲畫面
+    private:
+        int counter;	// 倒數之計數器
+};
 
 }

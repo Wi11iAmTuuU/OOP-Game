@@ -34,6 +34,30 @@ int Map::GetBlock(int x, int y)
     //map[x][y]中的y表示X軸的格數，x表示Y軸
     return Map1[gy][gx]; // 回傳方塊
 }
+void Map::StorePortal()
+{
+	int index = 50;
+	int i, j, k;
+	int check = 0;
+	for (i = 0; i < 10; i++) {
+		for (j = 0; j < 30; j++) {
+			for (k = 0; k < 40; k++) {
+				if (Map1[j][k] == index) {
+					Portal[i][0] = j+1;
+					Portal[i][1] = k+1;
+					check = 1;
+					break;
+				}
+			}
+			if (check == 1) {
+				index++;
+				break;
+			}
+		}
+		check = 0;
+	}
+}
+
 void Map::ReadMap(int MapNumber)
 {
     if (MapNumber == 0)
@@ -47,8 +71,8 @@ void Map::ReadMap(int MapNumber)
                 fin >> Map1[i][k];
             }
         }
-
         fin.close();
+		StorePortal();
     }
     else if (MapNumber == 1)
     {
@@ -61,8 +85,8 @@ void Map::ReadMap(int MapNumber)
                 fin >> Map1[i][k];
             }
         }
-
         fin.close();
+		StorePortal();
     }
 }
 void Map::Initialize() //初始化
@@ -85,7 +109,10 @@ void Map::LoadBitmap() //載入圖片
 	door.LoadBitmap("RES\\Block\\door.bmp", RGB(255, 255, 255));
 	WaterBlock.LoadBitmap("RES\\Block\\waterblock.bmp", RGB(255, 255, 255));
 	JumpBlock.LoadBitmap("RES\\Block\\Jumpblock.bmp", RGB(255, 255, 255));
+	PortalBlock.LoadBitmap("RES\\Block\\Portalblock.bmp", RGB(255, 255, 255));
 }
+
+
 
 void Map::OnMove(int x, int y)
 {
@@ -166,6 +193,46 @@ void Map::OnShow(int MapNumber)
 					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
 					door.ShowBitmap();
 					break;
+				case 50:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
+				case 51:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
+				case 52:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
+				case 53:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
+				case 54:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
+				case 55:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
+				case 56:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
+				case 57:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
+				case 58:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
+				case 59:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
 				case 10:
 					if (i == CheckpointY && j == CheckpointX) {
 						LightCheckpointBlock.SetTopLeft(x, y);
@@ -214,6 +281,16 @@ int Map::GetCheckpointX()
 int Map::GetCheckpointY()
 {
     return CheckpointY;
+}
+int Map::GetPortalX(int index)
+{
+	index = index % 10;
+	return Portal[index][1] - 1;
+}
+int Map::GetPortalY(int index)
+{
+	index = index % 10;
+	return Portal[index][0] - 1;
 }
 //int Map::GetMapNumber()
 //{

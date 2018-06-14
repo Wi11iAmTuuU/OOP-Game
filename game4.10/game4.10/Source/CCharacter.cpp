@@ -25,7 +25,9 @@ CCharacter::CCharacter()
     Isfalling = false;
     IsDieing = false;
     IsReliving = false;
+	IsTransfer = false;
     dieCounter = 0;
+	PortalCounter = 0;
 	velocityLeft = velocityRight = 0;
     //
 }
@@ -92,6 +94,13 @@ void CCharacter::LoadBitmap()
     animation_relive.AddBitmap("RES\\Character\\CharacterDie2.bmp", RGB(255, 255, 255));
     animation_relive.AddBitmap("RES\\Character\\CharacterDie1.bmp", RGB(255, 255, 255));
     animation_relive.AddBitmap("RES\\Character\\Character1.bmp", RGB(255, 255, 255));
+	//
+	animation_transfer.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
+	animation_transfer.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
+	animation_transfer.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
+	animation_transfer.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
+	animation_transfer.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
+	animation_transfer.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
 }
 
 void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
@@ -558,6 +567,27 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
 		IsJumpingLeft = true;
 		velocityLeft = 20;
 	}
+	if ((((m->GetBlock(x, y + animation.Height() + 2) >= 50)) && ((m->GetBlock(x, y + animation.Height() + 2) <= 59))) || (((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) >= 50)) && ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) <= 59)))) {  //傳送門方塊
+		PortalNumber = m->GetBlock(x, y + animation.Height() + 2);
+		if (PortalNumber < (m->GetBlock(x + animation.Width(), y + animation.Height() + 2))) {
+			PortalNumber = m->GetBlock(x + animation.Width(), y + animation.Height() + 2);
+		}
+		if (PortalNumber % 2 == 0) {
+			IsTransfer = true;
+		}
+	}
+	if (IsTransfer) {  //確認傳送過去
+		if (PortalCounter < 12) {
+			PortalCounter++;
+		}
+		else {
+			x = m->GetPortalX(PortalNumber + 1) * 48 + 10;
+			y = m->GetPortalY(PortalNumber + 1) * 40 - 37;
+			PortalCounter = 0;
+			IsTransfer = false;
+		}
+		
+	}
 }
 void CCharacter::SetMovingLeft(bool flag)
 {
@@ -635,6 +665,12 @@ void CCharacter::OnShow(Map* m)
         animation_relive.OnShow();
         animation_relive.OnMove();
     }
+	else if (IsTransfer)
+	{
+		animation_transfer.SetTopLeft(m->ScreenX(x), m->ScreenY(y));
+		animation_transfer.OnShow();
+		animation_transfer.OnMove();
+	}
     else
     {
         animation.SetTopLeft(m->ScreenX(x), m->ScreenY(y));

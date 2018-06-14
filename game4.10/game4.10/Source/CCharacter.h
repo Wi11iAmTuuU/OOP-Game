@@ -38,6 +38,7 @@ class CCharacter
         CAnimation animation_right;			// 擦子的動畫
         CAnimation animation_Die;			// 擦子的動畫
         CAnimation animation_relive;		// 擦子的動畫
+		CAnimation animation_transfer;        // 擦子的動畫
         int x, y;							// 擦子左上角座標
 
         int MapNumber;
@@ -50,6 +51,8 @@ class CCharacter
 		int velocityLeft;
 		int velocityRight;
         int dieCounter;			// 死亡計數
+		int PortalCounter;		// 傳送門計數
+		int PortalNumber;       // 傳送門編號
         bool IsJumping;			// true表跳耀、false表非跳耀
         bool IsJumpTwice;		// true表已二段跳、false表未二段跳
         bool Isfalling;
@@ -57,6 +60,7 @@ class CCharacter
         bool IsReliving;
 		bool IsJumpingRight;
 		bool IsJumpingLeft;
+		bool IsTransfer;
         //
         bool isMovingUp;
         //

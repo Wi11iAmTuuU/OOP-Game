@@ -26,6 +26,7 @@ CCharacter::CCharacter()
     IsDieing = false;
     IsReliving = false;
     dieCounter = 0;
+	velocityLeft = velocityRight = 0;
     //
 }
 
@@ -363,6 +364,106 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
             IsReliving = false;
         }
     }
+	//
+	if (IsJumpingRight == true) {
+		if (velocityRight > 0) {
+			for (i = 0; i < animation.Height(); i++) {  //向右時判斷右方是否有碰撞到東西
+				for (j = 0; j < velocityRight; j++) {
+					if ((m->GetBlock(x + animation.Width() + j, y + i) != 0) && (m->GetBlock(x + animation.Width() + j, y + i) != 11) && (m->GetBlock(x + animation.Width() + j, y + i) != 12)) {
+						break;
+					}
+				}
+				if (j != velocityRight)  break;
+			}
+			if (i == animation.Height()) {
+				x += velocityRight;	// 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
+				velocityRight--;		// 受重力影響，下次的上升速度降低
+			}
+			if ((m->GetBlock(x, y + animation.Height() + 1) != 0) && (m->GetBlock(x, y + animation.Height() + 1) != 11) && (m->GetBlock(x, y + animation.Height() + 1) != 12)) {
+				Isfalling = false;
+			}
+			else {
+				Isfalling = true;
+			}
+			if (Isfalling) {
+				for (i = 0; i < animation.Width(); i++)
+				{
+					for (j = 0; j < velocity; j++)
+					{
+						if (!(m->isEmpty(x + i, y + animation.Height() + j)))
+						{
+							y = y + j - 2;
+							velocity = initial_velocity;	// 重設上升初始速度
+							Isfalling = false;
+							rising = true;
+							break;
+						}
+					}
+
+					if (j != velocity) break;
+				}
+
+				if (i == animation.Width())
+				{
+					y += velocity;
+					velocity++;
+				}
+			}
+		}
+		else {
+			IsJumpingRight = false;
+			velocity = initial_velocity;	// 重設上升初始速度
+		}
+	}
+
+	if (IsJumpingLeft == true) {
+		if (velocityLeft > 0) {
+			for (i = 0; i < animation.Height(); i++) {  //上升時判斷右方是否有碰撞到東西
+				for (j = 0; j < velocityLeft; j++) {
+					if ((m->GetBlock(x - j, y + i) != 0)&& (m->GetBlock(x - j, y + i) != 12)) {
+						break;
+					}
+				}
+				if (j != velocityLeft)  break;
+			}
+			if (i == animation.Height()) {
+				x -= velocityLeft;	// 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
+				velocityLeft--;		// 受重力影響，下次的上升速度降低
+			}
+			if ((m->GetBlock(x, y + animation.Height() + 1) != 0) && (m->GetBlock(x, y + animation.Height() + 1) != 11) && (m->GetBlock(x, y + animation.Height() + 1) != 12)) {
+				Isfalling = false;
+			}
+			else {
+				Isfalling = true;
+			}
+			if (Isfalling) {
+				for (i = 0; i < animation.Width(); i++)
+				{
+					for (j = 0; j < velocity; j++)
+					{
+						if (!(m->isEmpty(x + i, y + animation.Height() + j)))
+						{
+							y = y + j - 2;
+							velocity = initial_velocity;	// 重設上升初始速度
+							Isfalling = false;
+							break;
+						}
+					}
+
+					if (j != velocity) break;
+				}
+
+				if (i == animation.Width())
+				{
+					y += velocity;
+					velocity++;
+				}
+			}
+		}
+		else {
+			IsJumpingLeft = false;
+		}
+	}
 
     //
     if (isMovingUp)
@@ -451,11 +552,11 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
 	}
 	else if (((m->GetBlock(x - 5, y) == 6)) || ((m->GetBlock(x - 5, y + animation.Height()) == 6))) { //跳躍方塊  (人物左方)
 		IsJumpingRight = true;
-		velocity = 15;
+		velocityRight = 20;
 	}
 	else if (((m->GetBlock(x + animation.Width() + 5, y) == 6)) || ((m->GetBlock(x + animation.Width() + 5, y + animation.Height()) == 6))) { //跳躍方塊  (人物右方)
 		IsJumpingLeft = true;
-		velocity = 15;
+		velocityLeft = 20;
 	}
 }
 void CCharacter::SetMovingLeft(bool flag)

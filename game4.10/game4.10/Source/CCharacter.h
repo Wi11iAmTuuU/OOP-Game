@@ -47,6 +47,8 @@ class CCharacter
         bool falling;           // true表下降、false表上升
         int initial_velocity;	// 初始速度
         int velocity;			// 目前的速度(點/次)
+		int velocityLeft;
+		int velocityRight;
         int dieCounter;			// 死亡計數
         bool IsJumping;			// true表跳耀、false表非跳耀
         bool IsJumpTwice;		// true表已二段跳、false表未二段跳

@@ -28,19 +28,22 @@ class Map
         int	 GetCheckpointY();				// 記錄點用
         //int  GetMapNumber();				// 取的地圖編號
         //void ChangeMapNumber(int);             //改變地圖編號
-    protected:
-        CMovingBitmap background;			// 地圖
-        CMovingBitmap Normalblock;			//顯示一般方塊
-        CMovingBitmap LoseSpeedBlock;		//顯示減速方塊
-        CMovingBitmap SpeedBlock;			//顯示加速方塊
-        CMovingBitmap AutoSpeedBlockRight;  //顯示往右自動方塊
-        CMovingBitmap AutoSpeedBlockLeft;   //顯示往左自動方塊
-        CMovingBitmap CheckpointBlock;		//顯示記錄點方塊
-        CMovingBitmap LightCheckpointBlock; //顯示記錄點方塊(開啟)
-        CMovingBitmap door;                 //顯示門
-    private:
-        int sx, sy;							// 左上角座標
-        int Map1[30][40] = { 0 };   // 1 = 一般方塊 2 = 減速方塊 3 = 加速方塊 11 = 門
-        int CheckpointX, CheckpointY;
+protected:
+	CMovingBitmap background;			// 地圖
+	CMovingBitmap Normalblock;			//顯示一般方塊
+	CMovingBitmap LoseSpeedBlock;		//顯示減速方塊
+	CMovingBitmap SpeedBlock;			//顯示加速方塊
+	CMovingBitmap AutoSpeedBlockRight;  //顯示往右自動方塊
+	CMovingBitmap AutoSpeedBlockLeft;   //顯示往左自動方塊
+	CMovingBitmap WaterBlock;           //顯示水方塊
+	CMovingBitmap CheckpointBlock;		//顯示記錄點方塊
+	CMovingBitmap LightCheckpointBlock; //顯示記錄點方塊(開啟)
+	CMovingBitmap JumpBlock;			//顯示跳躍方塊
+	CMovingBitmap door;                 //顯示門
+private:
+	int sx, sy;							// 左上角座標
+	int Map1[30][40] = { 0 };   // 1 = 一般方塊 2 = 減速方塊 3 = 加速方塊 4 = 向右自動方塊 5 = 向左自動方塊 
+								// 6 = 跳躍方塊 9 = 水方塊 10 = CheckPoint 11 = 門 
+	int CheckpointX, CheckpointY;
 };
 }

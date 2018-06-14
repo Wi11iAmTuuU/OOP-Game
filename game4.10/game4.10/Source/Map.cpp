@@ -74,15 +74,17 @@ void Map::Initialize() //初始化
 }
 void Map::LoadBitmap() //載入圖片
 {
-    background.LoadBitmap(IDB_BACKGROUND);
-    Normalblock.LoadBitmap("RES\\Block\\normalblock.bmp", RGB(255, 255, 255));
-    LoseSpeedBlock.LoadBitmap("RES\\Block\\LosespeedBlock.bmp", RGB(255, 255, 255));
-    SpeedBlock.LoadBitmap("RES\\Block\\SpeedBlock.bmp", RGB(255, 255, 255));
-    AutoSpeedBlockRight.LoadBitmap("RES\\Block\\AutoSpeedBlockRight.bmp", RGB(255, 255, 255));
-    AutoSpeedBlockLeft.LoadBitmap("RES\\Block\\AutoSpeedBlockLeft.bmp", RGB(255, 255, 255));
-    LightCheckpointBlock.LoadBitmap("RES\\Block\\LightCheckpointBlock.bmp", RGB(255, 255, 255));
-    CheckpointBlock.LoadBitmap("RES\\Block\\CheckpointBlock.bmp", RGB(255, 255, 255));
-    door.LoadBitmap("RES\\Block\\door.bmp", RGB(255, 255, 255));
+	background.LoadBitmap(IDB_BACKGROUND);
+	Normalblock.LoadBitmap("RES\\Block\\normalblock.bmp", RGB(255, 255, 255));
+	LoseSpeedBlock.LoadBitmap("RES\\Block\\LosespeedBlock.bmp", RGB(255, 255, 255));
+	SpeedBlock.LoadBitmap("RES\\Block\\SpeedBlock.bmp", RGB(255, 255, 255));
+	AutoSpeedBlockRight.LoadBitmap("RES\\Block\\AutoSpeedBlockRight.bmp", RGB(255, 255, 255));
+	AutoSpeedBlockLeft.LoadBitmap("RES\\Block\\AutoSpeedBlockLeft.bmp", RGB(255, 255, 255));
+	LightCheckpointBlock.LoadBitmap("RES\\Block\\LightCheckpointBlock.bmp", RGB(255, 255, 255));
+	CheckpointBlock.LoadBitmap("RES\\Block\\CheckpointBlock.bmp", RGB(255, 255, 255));
+	door.LoadBitmap("RES\\Block\\door.bmp", RGB(255, 255, 255));
+	WaterBlock.LoadBitmap("RES\\Block\\waterblock.bmp", RGB(255, 255, 255));
+	JumpBlock.LoadBitmap("RES\\Block\\Jumpblock.bmp", RGB(255, 255, 255));
 }
 
 void Map::OnMove(int x, int y)
@@ -112,83 +114,73 @@ void Map::OnMove(int x, int y)
 }
 void Map::OnShow(int MapNumber)
 {
-    background.SetTopLeft(-sx, -sy);
-    background.ShowBitmap();
-
-    for (int i = 0; i < 30; i++)
-    {
-        for (int j = 0; j < 40; j++)
-        {
-            int x = j * 48 - sx; // 算出第(i, j)這一格的 x 螢幕座標
-            int y = i * 40 - sy; // 算出第(i, j)這一格的 y 螢幕座標
-
-            if (MapNumber == 0)
-            {
-                switch (Map1[i][j])
-                {
-                    case 1:
-                        Normalblock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標
-                        Normalblock.ShowBitmap();
-                        break;
-
-                    case 11:
-                        door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標
-                        door.ShowBitmap();
-                        break;
-                }
-            }
-
-            if (MapNumber == 1)
-            {
-                switch (Map1[i][j])
-                {
-                    case 1:
-                        Normalblock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標
-                        Normalblock.ShowBitmap();
-                        break;
-
-                    case 2:
-                        LoseSpeedBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標
-                        LoseSpeedBlock.ShowBitmap();
-                        break;
-
-                    case 3:
-                        SpeedBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標
-                        SpeedBlock.ShowBitmap();
-                        break;
-
-                    case 4:
-                        AutoSpeedBlockRight.SetTopLeft(x, y); // 指定第(i, j)這一格的座標
-                        AutoSpeedBlockRight.ShowBitmap();
-                        break;
-
-                    case 5:
-                        AutoSpeedBlockLeft.SetTopLeft(x, y); // 指定第(i, j)這一格的座標
-                        AutoSpeedBlockLeft.ShowBitmap();
-                        break;
-
-                    case 12:
-                        door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標
-                        door.ShowBitmap();
-                        break;
-
-                    case 10:
-                        if (i == CheckpointY && j == CheckpointX)
-                        {
-                            LightCheckpointBlock.SetTopLeft(x, y);
-                            LightCheckpointBlock.ShowBitmap();
-                        }
-                        else
-                        {
-                            CheckpointBlock.SetTopLeft(x, y);
-                            CheckpointBlock.ShowBitmap();
-                        }
-
-                        break;
-                }
-            }
-        }
-    }
+	background.SetTopLeft(-sx, -sy);
+	background.ShowBitmap();
+	for (int i = 0; i < 30; i++) {
+		for (int j = 0; j < 40; j++) {
+			int x = j * 48 - sx; // 算出第(i, j)這一格的 x 螢幕座標 
+			int y = i * 40 - sy; // 算出第(i, j)這一格的 y 螢幕座標 
+			if (MapNumber == 0) {
+				switch (Map1[i][j]) {
+				case 1:
+					Normalblock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					Normalblock.ShowBitmap();
+					break;
+				case 11:
+					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					door.ShowBitmap();
+					break;
+				}
+			}
+			if (MapNumber == 1) {
+				switch (Map1[i][j]) {
+				case 1:
+					Normalblock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					Normalblock.ShowBitmap();
+					break;
+				case 2:
+					LoseSpeedBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					LoseSpeedBlock.ShowBitmap();
+					break;
+				case 3:
+					SpeedBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					SpeedBlock.ShowBitmap();
+					break;
+				case 4:
+					AutoSpeedBlockRight.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					AutoSpeedBlockRight.ShowBitmap();
+					break;
+				case 5:
+					AutoSpeedBlockLeft.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					AutoSpeedBlockLeft.ShowBitmap();
+					break;
+				case 6:
+					JumpBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					JumpBlock.ShowBitmap();
+					break;
+				case 9:
+					WaterBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					WaterBlock.ShowBitmap();
+					break;
+				case 12:
+					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					door.ShowBitmap();
+					break;
+				case 10:
+					if (i == CheckpointY && j == CheckpointX) {
+						LightCheckpointBlock.SetTopLeft(x, y);
+						LightCheckpointBlock.ShowBitmap();
+					}
+					else
+					{
+						CheckpointBlock.SetTopLeft(x, y);
+						CheckpointBlock.ShowBitmap();
+					}
+					break;
+				}
+			}
+		}
+	}
 }
 void Map::SetXY(int nx, int ny)   // 設定螢幕畫面左上角的座標
 {

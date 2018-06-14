@@ -384,73 +384,79 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
     }
 
     //
-    if (((m->GetBlock(x, y + animation.Height() + 2) == 4)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 4)))    //向右自動方塊
-    {
-        for (i = 0; i < animation.Height(); i++)
-        {
-            if ((m->GetBlock(x + animation.Width() + 3, y + i) != 0) && (m->GetBlock(x + animation.Width() + 3, y + i) != 11) && (m->GetBlock(x + animation.Width() + 3, y + i) != 12))
-            {
-                break;
-            }
-        }
-
-        if (i == animation.Height())
-        {
-            x += 3;
-
-            if (!IsJumping)
-            {
-                for (j = 0; j < animation.Width(); j++)    //判斷往右走時下方有沒有東西且不是跳躍的時候
-                {
-                    if ((m->GetBlock(x + j, y + animation.Height() + 1) != 0) && (m->GetBlock(x + j, y + animation.Height() + 1) != 11) && (m->GetBlock(x + j, y + animation.Height() + 1) != 12))
-                    {
-                        Isfalling = false;
-                        break;
-                    }
-                    else if (!Isfalling)
-                    {
-                        Isfalling = true;
-                        rising = false;
-                        velocity = 1;
-                    }
-                }
-            }
-        }
-    }
-
-    if (((m->GetBlock(x, y + animation.Height() + 2) == 5)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 5)))   //向左自動方塊
-    {
-        for (i = 0; i < animation.Height(); i++)
-        {
-            if ((m->GetBlock(x - 3, y + i) != 0) && (m->GetBlock(x - 3, y + i) != 11) && (m->GetBlock(x - 3, y + i) != 12))
-            {
-                break;
-            }
-        }
-
-        if (i == animation.Height())
-        {
-            x -= 3;
-
-            if (!IsJumping)
-            {
-                for (j = 0; j < animation.Width(); j++)    //判斷往左走時下方有沒有東西且不是跳躍的時候
-                {
-                    if ((m->GetBlock(x + j, y + animation.Height() + 1) != 0) && (m->GetBlock(x + j, y + animation.Height() + 1) != 11) && (m->GetBlock(x + j, y + animation.Height() + 1) != 12))
-                    {
-                        Isfalling = false;
-                        break;
-                    }
-                    else if (!Isfalling)
-                    {
-                        Isfalling = true;
-                        rising = false;
-                        velocity = 1;
-                    }
-                }
-            }
-        }
-    }
+	if (((m->GetBlock(x, y + animation.Height() + 2) == 4)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 4))) {  //向右自動方塊
+		for (i = 0; i < animation.Height(); i++) {  //判斷右邊是不是空的
+			if ((m->GetBlock(x + animation.Width() + 3, y + i) != 0) && (m->GetBlock(x + animation.Width() + 3, y + i) != 11) && (m->GetBlock(x + animation.Width() + 3, y + i) != 12)) {
+				break;
+			}
+		}
+		if (i == animation.Height()) {
+			x += 3;
+			if (!IsJumping) {
+				for (j = 0; j < animation.Width(); j++) {  //判斷往右走時下方有沒有東西且不是跳躍的時候
+					if ((m->GetBlock(x + j, y + animation.Height() + 1) != 0) && (m->GetBlock(x + j, y + animation.Height() + 1) != 11) && (m->GetBlock(x + j, y + animation.Height() + 1) != 12)) {
+						Isfalling = false;
+						break;
+					}
+					else if (!Isfalling) {
+						Isfalling = true;
+						rising = false;
+						velocity = 1;
+					}
+				}
+			}
+		}
+	}
+	if (((m->GetBlock(x, y + animation.Height() + 2) == 5)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 5))) { //向左自動方塊
+		for (i = 0; i < animation.Height(); i++) {  //判斷左邊是不是空的
+			if ((m->GetBlock(x - 3, y + i) != 0) && (m->GetBlock(x - 3, y + i) != 11) && (m->GetBlock(x - 3, y + i) != 12)) {
+				break;
+			}
+		}
+		if (i == animation.Height()) {
+			x -= 3;
+			if (!IsJumping) {
+				for (j = 0; j < animation.Width(); j++) {  //判斷往左走時下方有沒有東西且不是跳躍的時候
+					if ((m->GetBlock(x + j, y + animation.Height() + 1) != 0) && (m->GetBlock(x + j, y + animation.Height() + 1) != 11) && (m->GetBlock(x + j, y + animation.Height() + 1) != 12)) {
+						Isfalling = false;
+						break;
+					}
+					else if (!Isfalling) {
+						Isfalling = true;
+						rising = false;
+						velocity = 1;
+					}
+				}
+			}
+		}
+	}
+	if (((m->GetBlock(x, y + animation.Height() + 2) == 9)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 9))) { //水方塊
+		IsDieing = true;
+	}
+	if (((m->GetBlock(x, y + animation.Height() + 2) == 10)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 10))) { //CheckPoint方塊
+		if (m->GetBlock(x, y + animation.Height() + 2) == 10) {
+			m->SetCheckpoint(x, y + animation.Height() + 2);
+		}
+		if (m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 10) {
+			m->SetCheckpoint(x + animation.Width(), y + animation.Height() + 2);
+		}
+	}
+	if (((m->GetBlock(x, y + animation.Height() + 2) == 6)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 6))) { //跳躍方塊  (人物下方)
+		IsJumping = true;
+		velocity = 20;
+	}
+	else if (((m->GetBlock(x, y - 2) == 6)) || ((m->GetBlock(x + animation.Width(), y - 2) == 6))) { //跳躍方塊  (人物上方)
+		Isfalling = true;
+		velocity = 20;
+	}
+	else if (((m->GetBlock(x - 5, y) == 6)) || ((m->GetBlock(x - 5, y + animation.Height()) == 6))) { //跳躍方塊  (人物左方)
+		IsJumpingRight = true;
+		velocity = 15;
+	}
+	else if (((m->GetBlock(x + animation.Width() + 5, y) == 6)) || ((m->GetBlock(x + animation.Width() + 5, y + animation.Height()) == 6))) { //跳躍方塊  (人物右方)
+		IsJumpingLeft = true;
+		velocity = 15;
+	}
 }
 void CCharacter::SetMovingLeft(bool flag)
 {

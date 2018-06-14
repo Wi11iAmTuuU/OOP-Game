@@ -53,6 +53,8 @@ class CCharacter
         bool Isfalling;
         bool IsDieing;
         bool IsReliving;
+		bool IsJumpingRight;
+		bool IsJumpingLeft;
         //
         bool isMovingUp;
         //

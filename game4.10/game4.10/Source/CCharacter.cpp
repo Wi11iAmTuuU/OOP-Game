@@ -26,6 +26,7 @@ CCharacter::CCharacter()
     IsDieing = false;
     IsReliving = false;
 	IsTransfer = false;
+	IsESC = false;
     dieCounter = 0;
 	PortalCounter = 0;
 	velocityLeft = velocityRight = 0;
@@ -50,6 +51,11 @@ int CCharacter::GetX2()
 int CCharacter::GetY2()
 {
     return y + animation.Height();
+}
+
+bool CCharacter::GetIsESC()
+{
+	return IsESC;
 }
 
 void CCharacter::Initialize()
@@ -103,13 +109,13 @@ void CCharacter::LoadBitmap()
 	animation_transfer.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
 }
 
-void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
+int CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escmenu)
 {
     const int STEP_SIZE = 5;
     int i, j;
     animation.OnMove();
 
-    if (isMovingLeft && !isMovingDown)
+    if (isMovingLeft && !isMovingDown && !IsESC)
     {
         for (i = 0; i < animation.Height(); i++)    //判斷往左邊走兩個格有沒有撞到障礙物
         {
@@ -168,7 +174,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
         }
     }
 
-    if (isMovingRight && !isMovingDown)
+    if (isMovingRight && !isMovingDown && !IsESC)
     {
         for (i = 0; i < animation.Height(); i++)     //判斷往右邊走兩個有沒有撞到障礙物
         {
@@ -256,17 +262,17 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
         }
     }
 
-    if (isMovingDown)
+    if (isMovingDown && !IsESC)
     {
     }
 
     //
-    if (isMovingJump && IsJumping == false && !isMovingDown)
+    if (isMovingJump && IsJumping == false && !isMovingDown && !IsESC)
     {
         IsJumping = true;		// 跳躍狀態
     }
 
-    if (isMovingJump && IsJumping == true && rising == false && IsJumpTwice == false)
+    if (isMovingJump && IsJumping == true && rising == false && IsJumpTwice == false && !IsESC)
     {
         IsJumpTwice = true;				// 二段跳啟動
         rising = true;					// 重設上升狀態
@@ -340,7 +346,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
         }
     }
 
-    if (isMovingDie)  									//死亡了喔
+    if (isMovingDie && !IsESC)  									//死亡了喔
     {
         IsDieing = true;
     }
@@ -475,7 +481,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
 	}
 
     //
-    if (isMovingUp)
+    if (isMovingUp && !IsESC)
     {
         if (m->GetBlock(x, y) == 11)
         {
@@ -586,8 +592,9 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
 			PortalCounter = 0;
 			IsTransfer = false;
 		}
-		
+
 	}
+	return 0;
 }
 void CCharacter::SetMovingLeft(bool flag)
 {
@@ -612,6 +619,11 @@ void CCharacter::SetMovingDown(bool flag)
 void CCharacter::SetMovingDie(bool flag)
 {
     isMovingDie = flag;
+}
+
+void CCharacter::SetIsESC(bool state)
+{
+	IsESC = state;
 }
 
 void CCharacter::SetMovingUp(bool flag)

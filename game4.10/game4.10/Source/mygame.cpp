@@ -97,6 +97,7 @@ void CGameStateInit::OnBeginState()
 void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
     const char KEY_ESC = 27;
+	const char KEY_ENTER = 13;
 	const char KEY_LEFT = 0x25; // keyboard左箭頭
 	const char KEY_SPACE = 0x20; // keyboard空白鍵
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
@@ -107,20 +108,12 @@ void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	else if (nChar == KEY_RIGHT) {
 		Menu.clickRight();
 	}
-	else if (nChar == KEY_SPACE)
+	else if (nChar == KEY_SPACE || nChar == KEY_ENTER)
 		if (Menu.clickEnter()) {
 			GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
 		}
 		else 
-		{
-			if (Menu.GetMusicState()) {
-				CAudio::Instance()->Play(AUDIO_MENU, true);
-			}
-			else 
-			{
-				CAudio::Instance()->Stop(AUDIO_MENU);
-			}
-		}
+		{}
 	else if (nChar == KEY_ESC) {								// Demo 關閉遊戲的方法
 			PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
 	}
@@ -221,6 +214,7 @@ void CGameStateRun::OnBeginState()
     help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
     GameMap = &gamemap[MapNumber];
     GameMap->ReadMap(MapNumber);                               // 設定起始座標
+	escmenu.Initialize();
     // 音樂 //
     //CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 }
@@ -236,8 +230,21 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
     //
     // 移動主角
     //
-    character.OnMove(&gamemap[MapNumber], &MapNumber, &counter);
+	if (character.OnMove(&gamemap[MapNumber], &MapNumber, &counter, &escmenu) == 1) {
+		for (int i = 0; i < NUMDIAMOND; i++)
+			diamond[1][i].SetIsAlive(true);
 
+		gamemap[1].SetCheckpoint(960, 1125);
+	}
+	else {}
+
+	if (escmenu.GetMusicState()) {
+		CAudio::Instance()->Resume();
+	}
+	else
+	{
+		CAudio::Instance()->Pause();
+	}
     //
     for (int i = 0; i < NUMDIAMOND; i++)
         if (diamond[MapNumber][i].IsAlive() && diamond[MapNumber][i].HitCharacter(&character))
@@ -289,6 +296,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
     help.LoadBitmap(IDB_HELP, RGB(255, 255, 255));				// 載入說明的圖形
     corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形
     corner.ShowBitmap(background);							// 將corner貼到background
+	escmenu.LoadBitmap();
     // 音樂 //
     //CAudio::Instance()->Load(AUDIO_DING,  "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
     //
@@ -306,9 +314,12 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
     const char KEY_DOWN = 0x28; // keyboard下箭頭
     const char KEY_UP = 0x26; // keyboard上箭頭
     const char KEY_Q = 0x51; // keyboard上箭頭
+	const char KEY_ESC = 27;
+	const char KEY_ENTER = 13;
+	bool ESCstop = false;
 
-    if (nChar == KEY_LEFT)
-        character.SetMovingLeft(true);
+	if (nChar == KEY_LEFT) 
+		character.SetMovingLeft(true);
 
     if (nChar == KEY_RIGHT)
         character.SetMovingRight(true);
@@ -324,6 +335,44 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
     if (nChar == KEY_Q)
         character.SetMovingDie(true);
+
+	// ESCmenu用 //
+	if (nChar == KEY_ESC && character.GetIsESC()) {
+		character.SetIsESC(false);
+		escmenu.SetState(0);
+		ESCstop = true;
+	}
+
+	if (nChar == KEY_LEFT && character.GetIsESC())
+		escmenu.clickLeft();
+
+	if (nChar == KEY_RIGHT && character.GetIsESC())
+		escmenu.clickRight();
+	
+	if (nChar == KEY_ESC && MapNumber != 0 && !ESCstop) {
+		character.SetIsESC(true);
+		escmenu.SetState(1);
+	}
+
+	if (nChar == KEY_ENTER && character.GetIsESC()) {
+		int WHAT2DO = escmenu.clickEnter();
+		if (WHAT2DO == 1) {
+			MapNumber = 0;
+			counter.ResetDiamondCount();
+			character.SetXY(960, 1125);
+			character.SetIsESC(false);
+			escmenu.SetState(0);
+		}
+		else if (WHAT2DO == 2) {
+			counter.ResetDiamondCount();
+			character.SetXY(960, 1125);
+			character.SetIsESC(false);
+			escmenu.SetState(0);
+			
+		}
+		else {}
+	}
+	//////////////
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -404,7 +453,8 @@ void CGameStateRun::OnShow()
 
     //for (int i = 0; i < NUMDIAMOND; i++)
     //	diamond[i].OnShow(GameMap);				// 貼上第i號
-    counter.OnShow(GameMap);
+    counter.OnShow();
+	escmenu.OnShow();
     //
     //  貼上左上及右下角落的圖
     //

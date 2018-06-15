@@ -44,6 +44,7 @@
 #include "Map.h"
 #include "CDiamond.h"
 #include "GameStartview.h"
+#include "EscMenu.h"
 
 namespace game_framework
 {
@@ -115,6 +116,7 @@ class CGameStateRun : public CGameState
         CDiamond		diamond[5][5];					// 鑽石[關卡數][鑽石數]
         CCharacter		character;						// 拍子
         Counter			counter;						// 計數器
+		EscMenu			escmenu;						// Esc選單
         Map	gamemap[5];
         Map* GameMap;
 };

@@ -47,7 +47,7 @@ protected:
 private:
 	int sx, sy;							// 左上角座標
 	int Map1[30][40] = { 0 };   // 1 = 一般方塊 2 = 減速方塊 3 = 加速方塊 4 = 向右自動方塊 5 = 向左自動方塊 
-								// 6 = 跳躍方塊 9 = 水方塊 10 = CheckPoint 12 = 門 傳送門 = 50~59
+								// 6 = 跳躍方塊 9 = 水方塊 10 = CheckPoint 12 = 門 傳送門 = 50~59 
 	int Portal[20][2] = { 0 };
 	int CheckpointX, CheckpointY;
 };

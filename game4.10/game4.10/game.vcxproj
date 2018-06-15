@@ -257,6 +257,7 @@
     <ClCompile Include="Source\CCharacter.cpp" />
     <ClCompile Include="Source\CDiamond.cpp" />
     <ClCompile Include="Source\Counter.cpp" />
+    <ClCompile Include="Source\EscMenu.cpp" />
     <ClCompile Include="Source\game.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -307,6 +308,7 @@
     <ClInclude Include="Source\Counter.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Source\EscMenu.h" />
     <ClInclude Include="Source\game.h" />
     <ClInclude Include="Source\gameDoc.h" />
     <ClInclude Include="Source\GameStartview.h" />

@@ -34,6 +34,7 @@ int Map::GetBlock(int x, int y)
     //map[x][y]中的y表示X軸的格數，x表示Y軸
     return Map1[gy][gx]; // 回傳方塊
 }
+
 void Map::StorePortal()
 {
 	int index = 50;
@@ -43,8 +44,8 @@ void Map::StorePortal()
 		for (j = 0; j < 30; j++) {
 			for (k = 0; k < 40; k++) {
 				if (Map1[j][k] == index) {
-					Portal[i][0] = j+1;
-					Portal[i][1] = k+1;
+					Portal[i][0] = j + 1;
+					Portal[i][1] = k + 1;
 					check = 1;
 					break;
 				}
@@ -57,7 +58,6 @@ void Map::StorePortal()
 		check = 0;
 	}
 }
-
 void Map::ReadMap(int MapNumber)
 {
     if (MapNumber == 0)
@@ -111,8 +111,6 @@ void Map::LoadBitmap() //載入圖片
 	JumpBlock.LoadBitmap("RES\\Block\\Jumpblock.bmp", RGB(255, 255, 255));
 	PortalBlock.LoadBitmap("RES\\Block\\Portalblock.bmp", RGB(255, 255, 255));
 }
-
-
 
 void Map::OnMove(int x, int y)
 {

@@ -21,7 +21,7 @@ class CCharacter
         void Initialize();					// 設定擦子為初始值
         void LoadBitmap();					// 載入圖形
         void SetXY(int nx, int ny);			// 設定擦子左上角座標
-        int OnMove(Map*, int*, Counter*, EscMenu*);	// 移動擦子
+        void OnMove(Map*, int*, Counter*, EscMenu*);	// 移動擦子
         void OnShow(Map*);					// 將擦子圖形貼到畫面
         void SetMovingLeft(bool flag);		// 設定是否正在往左移動
         void SetMovingRight(bool flag);		// 設定是否正在往右移動

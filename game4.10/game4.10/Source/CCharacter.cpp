@@ -109,7 +109,7 @@ void CCharacter::LoadBitmap()
 	animation_transfer.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
 }
 
-int CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escmenu)
+void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escmenu)
 {
     const int STEP_SIZE = 5;
     int i, j;
@@ -594,7 +594,6 @@ int CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escmen
 		}
 
 	}
-	return 0;
 }
 void CCharacter::SetMovingLeft(bool flag)
 {

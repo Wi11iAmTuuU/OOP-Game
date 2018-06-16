@@ -230,13 +230,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
     //
     // 移動主角
     //
-	if (character.OnMove(&gamemap[MapNumber], &MapNumber, &counter, &escmenu) == 1) {
-		for (int i = 0; i < NUMDIAMOND; i++)
-			diamond[1][i].SetIsAlive(true);
-
-		gamemap[1].SetCheckpoint(960, 1125);
-	}
-	else {}
+	character.OnMove(&gamemap[MapNumber], &MapNumber, &counter, &escmenu);
 
 	if (escmenu.GetMusicState()) {
 		CAudio::Instance()->Resume();
@@ -368,7 +362,10 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 			character.SetXY(960, 1125);
 			character.SetIsESC(false);
 			escmenu.SetState(0);
-			
+			for (int i = 0; i < 5; i++)
+				diamond[1][i].SetIsAlive(true);
+
+			gamemap[1].SetCheckpoint(960, 1125);
 		}
 		else {}
 	}

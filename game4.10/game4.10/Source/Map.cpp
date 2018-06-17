@@ -9,9 +9,11 @@
 #include "fstream"
 namespace game_framework
 {
-
-
-int Map::GetWidth() //取得背景寬度
+	Map::Map()
+	{
+		IsPass = false;
+	}
+	int Map::GetWidth() //取得背景寬度
 {
     return background.Width();
 }
@@ -257,6 +259,10 @@ void Map::SetCheckpoint(int X, int Y)
     CheckpointX = X / 48; // 轉換為X軸格座標(整數除法)
     CheckpointY = Y / 40; // 轉換為Y軸格座標(整數除法)
 }
+void Map::SetIsPass(bool pass)
+{
+	IsPass = pass;
+}
 bool Map::isEmpty(int x, int y)
 {
     int gx = x / 48; // 轉換為X軸格座標(整數除法)
@@ -289,6 +295,10 @@ int Map::GetPortalY(int index)
 {
 	index = index % 10;
 	return Portal[index][0] - 1;
+}
+bool Map::GetIsPass()
+{
+	return IsPass;
 }
 //int Map::GetMapNumber()
 //{

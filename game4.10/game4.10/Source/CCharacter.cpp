@@ -107,6 +107,7 @@ void CCharacter::LoadBitmap()
 	animation_transfer.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
 	animation_transfer.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
 	animation_transfer.AddBitmap("RES\\Character\\CharacterDie3.bmp", RGB(255, 255, 255));
+
 }
 
 void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escmenu)
@@ -134,20 +135,6 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escme
             else if (((m->GetBlock(x, y + animation.Height() + 2) == 3)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 3)))
             {
                 x -= 8;
-            }
-            else if (((m->GetBlock(x, y + animation.Height() + 2) == 10)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 10)))
-            {
-                if (m->GetBlock(x, y + animation.Height() + 2) == 10)
-                {
-                    m->SetCheckpoint(x, y + animation.Height() + 2);
-                }
-
-                if (m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 10)
-                {
-                    m->SetCheckpoint(x + animation.Width(), y + animation.Height() + 2);
-                }
-
-                x -= STEP_SIZE;
             }
             else
             {
@@ -193,20 +180,6 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escme
             else if (((m->GetBlock(x, y + animation.Height() + 2) == 3)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 3)))
             {
                 x += 8;
-            }
-            else if (((m->GetBlock(x, y + animation.Height() + 2) == 10)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 10)))
-            {
-                if (m->GetBlock(x, y + animation.Height() + 2) == 10)
-                {
-                    m->SetCheckpoint(x, y + animation.Height() + 2);
-                }
-
-                if (m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 10)
-                {
-                    m->SetCheckpoint(x + animation.Width(), y + animation.Height() + 2);
-                }
-
-                x += STEP_SIZE;
             }
             else
             {
@@ -489,6 +462,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escme
             counter->ResetDiamondCount();
             x = 960;
             y = 1125;
+			CAudio::Instance()->Play(AUDIO_DOOR, false);
         }
         else if (m->GetBlock(x, y) == 12 && (counter->GetDiamondCount() == 5))
         {
@@ -496,7 +470,13 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escme
             counter->ResetDiamondCount();
             x = 960;
             y = 1125;
+			CAudio::Instance()->Play(AUDIO_DOOR, false);
+			m->SetIsPass(true);
         }
+		else if (m->GetBlock(x, y) == 12 && (counter->GetDiamondCount() != 5))
+		{
+			CAudio::Instance()->Play(AUDIO_UNPASS, false);
+		}
     }
 
     //
@@ -548,6 +528,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escme
 	}
 	if (((m->GetBlock(x, y + animation.Height() + 2) == 9)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 9))) { //水方塊
 		IsDieing = true;
+		CAudio::Instance()->Play(AUDIO_WATER, false);
 	}
 	if (((m->GetBlock(x, y + animation.Height() + 2) == 10)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 10))) { //CheckPoint方塊
 		if (m->GetBlock(x, y + animation.Height() + 2) == 10) {
@@ -560,18 +541,22 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escme
 	if (((m->GetBlock(x, y + animation.Height() + 2) == 6)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 6))) { //跳躍方塊  (人物下方)
 		IsJumping = true;
 		velocity = 20;
+		CAudio::Instance()->Play(AUDIO_JUMP, false);
 	}
 	else if (((m->GetBlock(x, y - 2) == 6)) || ((m->GetBlock(x + animation.Width(), y - 2) == 6))) { //跳躍方塊  (人物上方)
 		Isfalling = true;
 		velocity = 20;
+		CAudio::Instance()->Play(AUDIO_JUMP, false);
 	}
 	else if (((m->GetBlock(x - 5, y) == 6)) || ((m->GetBlock(x - 5, y + animation.Height()) == 6))) { //跳躍方塊  (人物左方)
 		IsJumpingRight = true;
 		velocityRight = 20;
+		CAudio::Instance()->Play(AUDIO_JUMP, false);
 	}
 	else if (((m->GetBlock(x + animation.Width() + 5, y) == 6)) || ((m->GetBlock(x + animation.Width() + 5, y + animation.Height()) == 6))) { //跳躍方塊  (人物右方)
 		IsJumpingLeft = true;
 		velocityLeft = 20;
+		CAudio::Instance()->Play(AUDIO_JUMP, false);
 	}
 	if ((((m->GetBlock(x, y + animation.Height() + 2) >= 50)) && ((m->GetBlock(x, y + animation.Height() + 2) <= 59))) || (((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) >= 50)) && ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) <= 59)))) {  //傳送門方塊
 		PortalNumber = m->GetBlock(x, y + animation.Height() + 2);
@@ -580,6 +565,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escme
 		}
 		if (PortalNumber % 2 == 0) {
 			IsTransfer = true;
+			CAudio::Instance()->Play(AUDIO_PORTAL, false);
 		}
 	}
 	if (IsTransfer) {  //確認傳送過去

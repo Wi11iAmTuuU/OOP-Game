@@ -86,6 +86,12 @@ void CGameStateInit::OnInit()
     //
 	Menu.LoadBitmap();
 	CAudio::Instance()->Load(AUDIO_MENU, "RES\\Menu\\Menu_BGM.mp3");	// 載入編號1的聲音
+	CAudio::Instance()->Load(AUDIO_DOOR, "RES\\SE\\DoorBlock.mp3");
+	CAudio::Instance()->Load(AUDIO_JUMP, "RES\\SE\\JumpBlock.mp3");
+	CAudio::Instance()->Load(AUDIO_PORTAL, "RES\\SE\\TPBlock.mp3");
+	CAudio::Instance()->Load(AUDIO_WATER, "RES\\SE\\WaterBlock.mp3");
+	CAudio::Instance()->Load(AUDIO_UNPASS, "RES\\SE\\UNpass.mp3");
+	CAudio::Instance()->Load(AUDIO_DIAMOND, "RES\\SE\\Diamond.mp3");
 	CAudio::Instance()->Play(AUDIO_MENU, true);
 }
 
@@ -162,21 +168,14 @@ void CGameStateOver::OnInit()
     // 最終進度為100%
     //
     ShowInitProgress(100);
+	//
+	BigShow.Initialize();
+	BigShow.LoadBitmap();
 }
 
 void CGameStateOver::OnShow()
 {
-    CDC* pDC = CDDraw::GetBackCDC();     		// 取得 Back Plain 的 CDC
-    CFont f, *fp;
-    f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-    fp = pDC->SelectObject(&f);					// 選用 font f
-    pDC->SetBkColor(RGB(0, 0, 0));
-    pDC->SetTextColor(RGB(255, 255, 0));
-    char str[80];								// Demo 數字對字串的轉換
-    sprintf(str, "Game Over ! (%d)", counter / 30);
-    pDC->TextOut(240, 210, str);
-    pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-    CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+	BigShow.OnShow();
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -215,6 +214,7 @@ void CGameStateRun::OnBeginState()
     GameMap = &gamemap[MapNumber];
     GameMap->ReadMap(MapNumber);                               // 設定起始座標
 	escmenu.Initialize();
+	pass = false;
     // 音樂 //
     //CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 }
@@ -232,12 +232,12 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
     //
 	character.OnMove(&gamemap[MapNumber], &MapNumber, &counter, &escmenu);
 
-	if (escmenu.GetMusicState()) {
-		CAudio::Instance()->Resume();
+	if (!escmenu.GetMusicState()) {
+		CAudio::Instance()->Stop(AUDIO_MENU);
 	}
 	else
 	{
-		CAudio::Instance()->Pause();
+		CAudio::Instance()->Play(AUDIO_MENU,true);
 	}
     //
     for (int i = 0; i < NUMDIAMOND; i++)
@@ -255,8 +255,19 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
         gamemap[1].SetCheckpoint(960, 1125);
     }
-
     GameMap->OnMove(character.GetX1(), character.GetY1());
+	if (MapNumber == 0 && !pass) {
+		int passcount = 0;
+		for (int i = 0; i < 5; i++) {
+			if (gamemap[i].GetIsPass()) {
+				passcount += 1;
+			}
+		}
+		if (passcount == 2) {
+			pass = true;
+			GotoGameState(GAME_STATE_OVER);
+		}
+	}
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -278,7 +289,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
         for (int i = 0; i < NUMDIAMOND; i++)
             diamond[j][i].LoadBitmap();
 
-    background.LoadBitmap("RES\\Background.bmp");					// 載入背景的圖形
+    background.LoadBitmap("RES\\background1920.bmp");					// 載入背景的圖形
     //
     // 完成部分Loading動作，提高進度
     //
@@ -310,6 +321,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
     const char KEY_Q = 0x51; // keyboard上箭頭
 	const char KEY_ESC = 27;
 	const char KEY_ENTER = 13;
+	const char KEY_p = 80;
 	bool ESCstop = false;
 
 	if (nChar == KEY_LEFT) 
@@ -370,6 +382,9 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		else {}
 	}
 	//////////////
+	if (nChar == KEY_p) {
+		GotoGameState(GAME_STATE_OVER);
+	}
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)

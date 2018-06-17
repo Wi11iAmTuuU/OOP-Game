@@ -255,7 +255,7 @@
   <ItemGroup>
     <ClCompile Include="Source\audio.cpp" />
     <ClCompile Include="Source\CCharacter.cpp" />
-    <ClCompile Include="Source\CDiamond.cpp" />
+    <ClCompile Include="Source\Diamond.cpp" />
     <ClCompile Include="Source\Counter.cpp" />
     <ClCompile Include="Source\EscMenu.cpp" />
     <ClCompile Include="Source\game.cpp">
@@ -268,6 +268,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="Source\GameOver.cpp" />
     <ClCompile Include="Source\GameStartView.cpp" />
     <ClCompile Include="Source\gameView.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -304,13 +305,14 @@
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
     <ClInclude Include="Source\CCharacter.h" />
-    <ClInclude Include="Source\CDiamond.h" />
+    <ClInclude Include="Source\Diamond.h" />
     <ClInclude Include="Source\Counter.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Source\EscMenu.h" />
     <ClInclude Include="Source\game.h" />
     <ClInclude Include="Source\gameDoc.h" />
+    <ClInclude Include="Source\GameOver.h" />
     <ClInclude Include="Source\GameStartview.h" />
     <ClInclude Include="Source\gameView.h" />
     <ClInclude Include="Source\MainFrm.h" />

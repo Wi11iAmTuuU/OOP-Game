@@ -11,6 +11,16 @@ namespace game_framework
 
 class CCharacter
 {
+	enum AUDIO_ID  				// 定義各種音效的編號
+	{
+		AUDIO_MENU,				// 1
+		AUDIO_DOOR,
+		AUDIO_JUMP,
+		AUDIO_PORTAL,
+		AUDIO_WATER,
+		AUDIO_UNPASS,
+		AUDIO_DIAMOND
+	};
     public:
         CCharacter();
         int  GetX1();						// 擦子左上角 x 座標

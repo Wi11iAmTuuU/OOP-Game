@@ -199,26 +199,26 @@ namespace game_framework
 	{
 		const int BACKGROUND_X = 0;
 		//
-		diamond[1][0].SetMapXY(37, 21);
+		diamond[1][0].SetMapXY(32, 10);
 		diamond[1][0].SetIsAlive(true);
-		diamond[1][1].SetMapXY(18, 19);
+		diamond[1][1].SetMapXY(18, 18);
 		diamond[1][1].SetIsAlive(true);
-		diamond[1][2].SetMapXY(16, 17);
+		diamond[1][2].SetMapXY(16, 16);
 		diamond[1][2].SetIsAlive(true);
-		diamond[1][3].SetMapXY(4, 27);
+		diamond[1][3].SetMapXY(1, 26);
 		diamond[1][3].SetIsAlive(true);
-		diamond[1][4].SetMapXY(16, 28);
+		diamond[1][4].SetMapXY(20, 20);
 		diamond[1][4].SetIsAlive(true);
 		//
-		diamond[2][0].SetMapXY(41, 26);
+		diamond[2][0].SetMapXY(33, 26);
 		diamond[2][0].SetIsAlive(true);
-		diamond[2][1].SetMapXY(46, 10);
+		diamond[2][1].SetMapXY(38, 10);
 		diamond[2][1].SetIsAlive(true);
-		diamond[2][2].SetMapXY(8, 27);
+		diamond[2][2].SetMapXY(9, 27);
 		diamond[2][2].SetIsAlive(true);
 		diamond[2][3].SetMapXY(7, 7);
 		diamond[2][3].SetIsAlive(true);
-		diamond[2][4].SetMapXY(44, 3);
+		diamond[2][4].SetMapXY(36, 3);
 		diamond[2][4].SetIsAlive(true);
 		//
 		character.Initialize();
@@ -261,14 +261,20 @@ namespace game_framework
 			for (int i = 0; i < NUMDIAMOND; i++)
 				diamond[1][i].SetIsAlive(true);
 
-			gamemap[1].SetCheckpoint(960, 1125);
+			gamemap[1].SetCheckpoint(960, 1160);
 		}
-		GameMap->OnMove(character.GetX1(), character.GetY1());
+		if (MapNumber != 2)
+		{
+			for (int i = 0; i < NUMDIAMOND; i++)
+				diamond[2][i].SetIsAlive(true);
+
+			gamemap[2].SetCheckpoint(880, 1160);
+		}
 		if (MapNumber == 0 && !pass) {
 			int passcount = 0;
-			for (int i = 0; i < 5; i++) {
+			for (int i = 1; i < 5; i++) {
 				if (gamemap[i].GetIsPass()) {
-					passcount += 1;
+					passcount ++;
 				}
 			}
 			if (passcount == 2) {
@@ -276,6 +282,7 @@ namespace game_framework
 				GotoGameState(GAME_STATE_OVER);
 			}
 		}
+		GameMap->OnMove(character.GetX1(), character.GetY1());
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定

@@ -465,6 +465,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escme
             x = 960;
             y = 1125;
 			CAudio::Instance()->Play(AUDIO_DOOR, false);
+			m->SetIsPass(true);
         }
         else if (m->GetBlock(x, y) == 21)
         {
@@ -473,7 +474,6 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escme
             x = 960;
             y = 1125;
 			CAudio::Instance()->Play(AUDIO_DOOR, false);
-			m->SetIsPass(true);
         }
 		else if (m->GetBlock(x, y) == 22)
 		{

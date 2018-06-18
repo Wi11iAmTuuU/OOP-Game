@@ -113,7 +113,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
     {
         for (i = 0; i < animation.Height(); i++)    //判斷往左邊走兩個格有沒有撞到障礙物
         {
-            if ((m->GetBlock(x - 5, y + i) != 0) && (m->GetBlock(x - 5, y + i) != 11) && (m->GetBlock(x - 5, y + i) != 12))
+            if ((m->GetBlock(x - 5, y + i) != 0) && (m->GetBlock(x - 5, y + i) != 20) && (m->GetBlock(x - 5, y + i) != 21) && (m->GetBlock(x - 5, y + i) != 22) && (m->GetBlock(x - 5, y + i) != 23))
             {
                 break;
             }
@@ -127,7 +127,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
             }
             else if (((m->GetBlock(x, y + animation.Height() + 2) == 3)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 3)))
             {
-                x -= 8;
+                x -= 15;
             }
             else if (((m->GetBlock(x, y + animation.Height() + 2) == 10)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 10)))
             {
@@ -153,7 +153,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
         {
             for (j = 0; j < animation.Width(); j++)    //判斷往左走時下方有沒有東西且不是跳躍的時候
             {
-                if ((m->GetBlock(x + j, y + animation.Height() + 1) != 0) && (m->GetBlock(x + j, y + animation.Height() + 1) != 11) && (m->GetBlock(x + j, y + animation.Height() + 1) != 12))
+                if ((m->GetBlock(x + j, y + animation.Height() + 1) != 0) && (m->GetBlock(x + j, y + animation.Height() + 1) != 20) && (m->GetBlock(x + j, y + animation.Height() + 1) != 21) && (m->GetBlock(x + j, y + animation.Height() + 1) != 22) && (m->GetBlock(x + j, y + animation.Height() + 1) != 23))
                 {
                     Isfalling = false;
                     break;
@@ -172,7 +172,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
     {
         for (i = 0; i < animation.Height(); i++)     //判斷往右邊走兩個有沒有撞到障礙物
         {
-            if ((m->GetBlock(x + animation.Width() + 5, y + i) != 0) && (m->GetBlock(x + animation.Width() + 5, y + i) != 11) && (m->GetBlock(x + animation.Width() + 5, y + i) != 12))
+            if ((m->GetBlock(x + animation.Width() + 5, y + i) != 0) && (m->GetBlock(x + animation.Width() + 5, y + i) != 20) && (m->GetBlock(x + animation.Width() + 5, y + i) != 21) && (m->GetBlock(x + animation.Width() + 5, y + i) != 22) && (m->GetBlock(x + animation.Width() + 5, y + i) != 23))
             {
                 break;
             }
@@ -186,7 +186,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
             }
             else if (((m->GetBlock(x, y + animation.Height() + 2) == 3)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 3)))
             {
-                x += 8;
+                x += 15;
             }
             else if (((m->GetBlock(x, y + animation.Height() + 2) == 10)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 10)))
             {
@@ -212,7 +212,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
         {
             for (j = 0; j < animation.Width(); j++)    //判斷往右走時下方有沒有東西且不是跳躍的時候
             {
-                if ((m->GetBlock(x + j, y + animation.Height() + 1) != 0) && (m->GetBlock(x + j, y + animation.Height() + 1) != 11) && (m->GetBlock(x + j, y + animation.Height() + 1) != 12))
+                if ((m->GetBlock(x + j, y + animation.Height() + 1) != 0) && (m->GetBlock(x + j, y + animation.Height() + 1) != 20) && (m->GetBlock(x + j, y + animation.Height() + 1) != 21) && (m->GetBlock(x + j, y + animation.Height() + 1) != 22) && (m->GetBlock(x + j, y + animation.Height() + 1) != 23))
                 {
                     Isfalling = false;
                     break;
@@ -289,7 +289,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
                 {
                     for (j = 0; j < velocity; j++)
                     {
-                        if ((m->GetBlock(x + i, y - j) != 0) && (m->GetBlock(x + i, y - j) != 11) && (m->GetBlock(x + i, y - j) != 12))
+                        if ((m->GetBlock(x + i, y - j) != 0) && (m->GetBlock(x + i, y - j) != 20) && (m->GetBlock(x + i, y - j) != 21) && (m->GetBlock(x + i, y - j) != 22) && (m->GetBlock(x + i, y - j) != 23))
                         {
                             rising = false;
                             velocity = 1;
@@ -318,7 +318,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
             {
                 for (j = 0; j < velocity; j++)
                 {
-                    if ((m->GetBlock(x + i, y + animation.Height() + j) != 0) && (m->GetBlock(x + i, y + animation.Height() + j) != 11) && (m->GetBlock(x + i, y + animation.Height() + j) != 12))
+                    if ((m->GetBlock(x + i, y + animation.Height() + j) != 0) && (m->GetBlock(x + i, y + animation.Height() + j) != 20) && (m->GetBlock(x + i, y + animation.Height() + j) != 21) && (m->GetBlock(x + i, y + animation.Height() + j) != 22) && (m->GetBlock(x + i, y + animation.Height() + j) != 23))
                     {
                         y = y + j;
                         rising = true;
@@ -378,7 +378,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
 		if (velocityRight > 0) {
 			for (i = 0; i < animation.Height(); i++) {  //向右時判斷右方是否有碰撞到東西
 				for (j = 0; j < velocityRight; j++) {
-					if ((m->GetBlock(x + animation.Width() + j, y + i) != 0) && (m->GetBlock(x + animation.Width() + j, y + i) != 11) && (m->GetBlock(x + animation.Width() + j, y + i) != 12)) {
+					if ((m->GetBlock(x + animation.Width() + j, y + i) != 0) && (m->GetBlock(x + animation.Width() + j, y + i) != 20) && (m->GetBlock(x + animation.Width() + j, y + i) != 21) && (m->GetBlock(x + animation.Width() + j, y + i) != 22) && (m->GetBlock(x + animation.Width() + j, y + i) != 23)) {
 						break;
 					}
 				}
@@ -388,7 +388,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
 				x += velocityRight;	// 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
 				velocityRight--;		// 受重力影響，下次的上升速度降低
 			}
-			if ((m->GetBlock(x, y + animation.Height() + 1) != 0) && (m->GetBlock(x, y + animation.Height() + 1) != 11) && (m->GetBlock(x, y + animation.Height() + 1) != 12)) {
+			if ((m->GetBlock(x, y + animation.Height() + 1) != 0) && (m->GetBlock(x, y + animation.Height() + 1) != 20) && (m->GetBlock(x, y + animation.Height() + 1) != 21) && (m->GetBlock(x, y + animation.Height() + 1) != 22) && (m->GetBlock(x, y + animation.Height() + 1) != 23)) {
 				Isfalling = false;
 			}
 			else {
@@ -429,7 +429,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
 		if (velocityLeft > 0) {
 			for (i = 0; i < animation.Height(); i++) {  //上升時判斷右方是否有碰撞到東西
 				for (j = 0; j < velocityLeft; j++) {
-					if ((m->GetBlock(x - j, y + i) != 0)&& (m->GetBlock(x - j, y + i) != 12)) {
+					if ((m->GetBlock(x - j, y + i) != 0) && (m->GetBlock(x - j, y + i) != 20) && (m->GetBlock(x - j, y + i) != 21) && (m->GetBlock(x - j, y + i) != 22) && (m->GetBlock(x - j, y + i) != 23)) {
 						break;
 					}
 				}
@@ -439,7 +439,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
 				x -= velocityLeft;	// 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
 				velocityLeft--;		// 受重力影響，下次的上升速度降低
 			}
-			if ((m->GetBlock(x, y + animation.Height() + 1) != 0) && (m->GetBlock(x, y + animation.Height() + 1) != 11) && (m->GetBlock(x, y + animation.Height() + 1) != 12)) {
+			if ((m->GetBlock(x, y + animation.Height() + 1) != 0) && (m->GetBlock(x, y + animation.Height() + 1) != 20) && (m->GetBlock(x, y + animation.Height() + 1) != 21) && (m->GetBlock(x, y + animation.Height() + 1) != 22) && (m->GetBlock(x, y + animation.Height() + 1) != 23)) {
 				Isfalling = false;
 			}
 			else {
@@ -477,34 +477,49 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
     //
     if (isMovingUp)
     {
-        if (m->GetBlock(x, y) == 11)
-        {
-            *MapNumber = 1;
-            counter->ResetDiamondCount();
-            x = 960;
-            y = 1125;
-        }
-        else if (m->GetBlock(x, y) == 12 && (counter->GetDiamondCount() == 5))
+        if (m->GetBlock(x, y) == 20 && (counter->GetDiamondCount() == 5))
         {
             *MapNumber = 0;
             counter->ResetDiamondCount();
             x = 960;
             y = 1125;
         }
+        else if (m->GetBlock(x, y) == 21)
+        {
+            *MapNumber = 1;
+            counter->ResetDiamondCount();
+            x = 960;
+            y = 1125;
+        }
+		else if (m->GetBlock(x, y) == 22)
+		{
+			*MapNumber = 2;
+			counter->ResetDiamondCount();
+			x = 960;
+			y = 1125;
+		}
+		else if (m->GetBlock(x, y) == 23)
+		{
+			*MapNumber = 3;
+			counter->ResetDiamondCount();
+			x = 960;
+			y = 1125;
+		}
+
     }
 
     //
 	if (((m->GetBlock(x, y + animation.Height() + 2) == 4)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 4))) {  //向右自動方塊
 		for (i = 0; i < animation.Height(); i++) {  //判斷右邊是不是空的
-			if ((m->GetBlock(x + animation.Width() + 3, y + i) != 0) && (m->GetBlock(x + animation.Width() + 3, y + i) != 11) && (m->GetBlock(x + animation.Width() + 3, y + i) != 12)) {
+			if ((m->GetBlock(x + animation.Width() + 3, y + i) != 0) && (m->GetBlock(x + animation.Width() + 3, y + i) != 20) && (m->GetBlock(x + animation.Width() + 3, y + i) != 21) && (m->GetBlock(x + animation.Width() + 3, y + i) != 22) && (m->GetBlock(x + animation.Width() + 3, y + i) != 23)) {
 				break;
 			}
 		}
 		if (i == animation.Height()) {
-			x += 3;
+			x += 15;
 			if (!IsJumping) {
 				for (j = 0; j < animation.Width(); j++) {  //判斷往右走時下方有沒有東西且不是跳躍的時候
-					if ((m->GetBlock(x + j, y + animation.Height() + 1) != 0) && (m->GetBlock(x + j, y + animation.Height() + 1) != 11) && (m->GetBlock(x + j, y + animation.Height() + 1) != 12)) {
+					if ((m->GetBlock(x + j, y + animation.Height() + 1) != 0) && (m->GetBlock(x + j, y + animation.Height() + 1) != 20) && (m->GetBlock(x + j, y + animation.Height() + 1) != 21) && (m->GetBlock(x + j, y + animation.Height() + 1) != 22) && (m->GetBlock(x + j, y + animation.Height() + 1) != 23)) {
 						Isfalling = false;
 						break;
 					}
@@ -519,15 +534,15 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
 	}
 	if (((m->GetBlock(x, y + animation.Height() + 2) == 5)) || ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) == 5))) { //向左自動方塊
 		for (i = 0; i < animation.Height(); i++) {  //判斷左邊是不是空的
-			if ((m->GetBlock(x - 3, y + i) != 0) && (m->GetBlock(x - 3, y + i) != 11) && (m->GetBlock(x - 3, y + i) != 12)) {
+			if ((m->GetBlock(x - 3, y + i) != 0) && (m->GetBlock(x - 3, y + i) != 20) && (m->GetBlock(x - 3, y + i) != 21) && (m->GetBlock(x - 3, y + i) != 22) && (m->GetBlock(x - 3, y + i) != 23)) {
 				break;
 			}
 		}
 		if (i == animation.Height()) {
-			x -= 3;
+			x -= 15;
 			if (!IsJumping) {
 				for (j = 0; j < animation.Width(); j++) {  //判斷往左走時下方有沒有東西且不是跳躍的時候
-					if ((m->GetBlock(x + j, y + animation.Height() + 1) != 0) && (m->GetBlock(x + j, y + animation.Height() + 1) != 11) && (m->GetBlock(x + j, y + animation.Height() + 1) != 12)) {
+					if ((m->GetBlock(x + j, y + animation.Height() + 1) != 0) && (m->GetBlock(x + j, y + animation.Height() + 1) != 20) && (m->GetBlock(x + j, y + animation.Height() + 1) != 21) && (m->GetBlock(x + j, y + animation.Height() + 1) != 22) && (m->GetBlock(x + j, y + animation.Height() + 1) != 23)) {
 						Isfalling = false;
 						break;
 					}
@@ -586,7 +601,6 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter)
 			PortalCounter = 0;
 			IsTransfer = false;
 		}
-		
 	}
 }
 void CCharacter::SetMovingLeft(bool flag)

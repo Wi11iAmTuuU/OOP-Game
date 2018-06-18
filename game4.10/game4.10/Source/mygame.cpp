@@ -193,8 +193,10 @@ void CGameStateOver::OnShow()
 CGameStateRun::CGameStateRun(CGame* g)
     : CGameState(g), MapNumber(0)
 {
-    gamemap[0].SetCheckpoint(960, 1160);
-    gamemap[1].SetCheckpoint(960, 1160);
+	gamemap[0].SetCheckpoint(960, 1125);
+	gamemap[1].SetCheckpoint(960, 1125);
+	gamemap[2].SetCheckpoint(960, 1125);
+	gamemap[3].SetCheckpoint(960, 1125);
 }
 
 CGameStateRun::~CGameStateRun()
@@ -205,17 +207,19 @@ void CGameStateRun::OnBeginState()
 {
     const int BACKGROUND_X = 0;
     //
-    diamond[1][0].SetMapXY(37, 21);
+    diamond[1][0].SetMapXY(33, 10);  //右上那顆
     diamond[1][0].SetIsAlive(true);
     diamond[1][1].SetMapXY(18, 19);
     diamond[1][1].SetIsAlive(true);
     diamond[1][2].SetMapXY(16, 17);
     diamond[1][2].SetIsAlive(true);
-    diamond[1][3].SetMapXY(4, 27);
+    diamond[1][3].SetMapXY(1, 26);
     diamond[1][3].SetIsAlive(true);
-    diamond[1][4].SetMapXY(16, 28);
+    diamond[1][4].SetMapXY(20, 18);
     diamond[1][4].SetIsAlive(true);
     //
+
+	//
     character.Initialize();
     background.SetTopLeft(BACKGROUND_X, 0);				// 設定背景的起始座標
     help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
@@ -294,8 +298,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
     //
     // 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
     //
-    gamemap[0].LoadBitmap();
-    gamemap[1].LoadBitmap();
+	for (int i = 0; i < 5; i++) {
+		gamemap[i].LoadBitmap();
+	}
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)

@@ -88,6 +88,34 @@ void Map::ReadMap(int MapNumber)
         fin.close();
 		StorePortal();
     }
+	else if (MapNumber == 2)
+	{
+		ifstream fin("RES\\MAP\\Map3.txt");
+
+		for (int i = 0; i < 30; i++)
+		{
+			for (int k = 0; k < 40; k++)
+			{
+				fin >> Map1[i][k];
+			}
+		}
+		fin.close();
+		StorePortal();
+	}
+	else if (MapNumber == 3)
+	{
+		ifstream fin("RES\\MAP\\Map4.txt");
+
+		for (int i = 0; i < 30; i++)
+		{
+			for (int k = 0; k < 40; k++)
+			{
+				fin >> Map1[i][k];
+			}
+		}
+		fin.close();
+		StorePortal();
+	}
 }
 void Map::Initialize() //初始化
 {
@@ -153,13 +181,25 @@ void Map::OnShow(int MapNumber)
 					Normalblock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
 					Normalblock.ShowBitmap();
 					break;
-				case 11:
+				case 20:
+					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					door.ShowBitmap();
+					break;
+				case 21:
+					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					door.ShowBitmap();
+					break;
+				case 22:
+					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					door.ShowBitmap();
+					break;
+				case 23:
 					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
 					door.ShowBitmap();
 					break;
 				}
 			}
-			if (MapNumber == 1) {
+			if (MapNumber == 1 || MapNumber == 2 || MapNumber == 3) {
 				switch (Map1[i][j]) {
 				case 1:
 					Normalblock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
@@ -189,7 +229,19 @@ void Map::OnShow(int MapNumber)
 					WaterBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
 					WaterBlock.ShowBitmap();
 					break;
-				case 12:
+				case 20:
+					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					door.ShowBitmap();
+					break;
+				case 21:
+					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					door.ShowBitmap();
+					break;
+				case 22:
+					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					door.ShowBitmap();
+					break;
+				case 23:
 					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
 					door.ShowBitmap();
 					break;

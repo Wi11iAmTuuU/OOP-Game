@@ -209,5 +209,11 @@
     <Text Include="RES\MAP\Map1.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="RES\MAP\Map3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="RES\MAP\Map4.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

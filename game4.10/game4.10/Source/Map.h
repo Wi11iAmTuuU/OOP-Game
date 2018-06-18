@@ -28,7 +28,7 @@ class Map
         int	 GetCheckpointX();				// 記錄點用
         int	 GetCheckpointY();				// 記錄點用
 		int  GetPortalX(int);				// 傳送門用
-		int  GetPortalY(int);				// 傳送門用
+		int  GetPortalY(int);				// 傳送用
         //int  GetMapNumber();				// 取的地圖編號
         //void ChangeMapNumber(int);             //改變地圖編號
 protected:
@@ -47,7 +47,7 @@ protected:
 private:
 	int sx, sy;							// 左上角座標
 	int Map1[30][40] = { 0 };   // 1 = 一般方塊 2 = 減速方塊 3 = 加速方塊 4 = 向右自動方塊 5 = 向左自動方塊 
-								// 6 = 跳躍方塊 9 = 水方塊 10 = CheckPoint 12 = 門 傳送門 = 50~59
+								// 6 = 跳躍方塊 9 = 水方塊 10 = CheckPoint 20 = 回大廳門 21 = 第一關的門 22 = 第二關的門 23 = 第三關的門 傳送門 = 50~59
 	int Portal[20][2] = { 0 };
 	int CheckpointX, CheckpointY;
 };

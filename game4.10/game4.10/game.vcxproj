@@ -338,6 +338,8 @@
   <ItemGroup>
     <Text Include="RES\MAP\Map1.txt" />
     <Text Include="RES\MAP\Map2.txt" />
+    <Text Include="RES\MAP\Map3.txt" />
+    <Text Include="RES\MAP\Map4.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -358,6 +358,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escme
 			for (i = 0; i < animation.Height(); i++) {  //向右時判斷右方是否有碰撞到東西
 				for (j = 0; j < velocityRight; j++) {
 					if ((m->GetBlock(x + animation.Width() + j, y + i) != 0) && (m->GetBlock(x + animation.Width() + j, y + i) != 20) && (m->GetBlock(x + animation.Width() + j, y + i) != 21) && (m->GetBlock(x + animation.Width() + j, y + i) != 22) && (m->GetBlock(x + animation.Width() + j, y + i) != 23)) {
+						velocityRight = -1;
 						break;
 					}
 				}
@@ -409,6 +410,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escme
 			for (i = 0; i < animation.Height(); i++) {  //上升時判斷右方是否有碰撞到東西
 				for (j = 0; j < velocityLeft; j++) {
 					if ((m->GetBlock(x - j, y + i) != 0) && (m->GetBlock(x - j, y + i) != 20) && (m->GetBlock(x - j, y + i) != 21) && (m->GetBlock(x - j, y + i) != 22) && (m->GetBlock(x - j, y + i) != 23)) {
+						velocityLeft = -1;
 						break;
 					}
 				}
@@ -477,7 +479,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escme
 		{
 			*MapNumber = 2;
 			counter->ResetDiamondCount();
-			x = 960;
+			x = 880;
 			y = 1125;
 		}
 		else if (m->GetBlock(x, y) == 23)
@@ -572,7 +574,7 @@ void CCharacter::OnMove(Map* m, int* MapNumber, Counter* counter, EscMenu* escme
 		velocityLeft = 20;
 		CAudio::Instance()->Play(AUDIO_JUMP, false);
 	}
-	if ((((m->GetBlock(x, y + animation.Height() + 2) >= 50)) && ((m->GetBlock(x, y + animation.Height() + 2) <= 59))) || (((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) >= 50)) && ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) <= 59)))) {  //傳送門方塊
+	if ((((m->GetBlock(x, y + animation.Height() + 2) >= 50)) && ((m->GetBlock(x, y + animation.Height() + 2) <= 65))) || (((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) >= 50)) && ((m->GetBlock(x + animation.Width(), y + animation.Height() + 2) <= 65)))) {  //傳送門方塊
 		PortalNumber = m->GetBlock(x, y + animation.Height() + 2);
 		if (PortalNumber < (m->GetBlock(x + animation.Width(), y + animation.Height() + 2))) {
 			PortalNumber = m->GetBlock(x + animation.Width(), y + animation.Height() + 2);

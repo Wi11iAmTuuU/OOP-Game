@@ -42,7 +42,7 @@ void Map::StorePortal()
 	int index = 50;
 	int i, j, k;
 	int check = 0;
-	for (i = 0; i < 10; i++) {
+	for (i = 0; i < 20; i++) {
 		for (j = 0; j < 30; j++) {
 			for (k = 0; k < 40; k++) {
 				if (Map1[j][k] == index) {
@@ -175,32 +175,7 @@ void Map::OnShow(int MapNumber)
 		for (int j = 0; j < 40; j++) {
 			int x = j * 48 - sx; // 算出第(i, j)這一格的 x 螢幕座標 
 			int y = i * 40 - sy; // 算出第(i, j)這一格的 y 螢幕座標 
-			if (MapNumber == 0) {
-				switch (Map1[i][j]) {
-				case 1:
-					Normalblock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
-					Normalblock.ShowBitmap();
-					break;
-				case 20:
-					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
-					door.ShowBitmap();
-					break;
-				case 21:
-					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
-					door.ShowBitmap();
-					break;
-				case 22:
-					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
-					door.ShowBitmap();
-					break;
-				case 23:
-					door.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
-					door.ShowBitmap();
-					break;
-				}
-			}
-			if (MapNumber == 1 || MapNumber == 2 || MapNumber == 3) {
-				switch (Map1[i][j]) {
+			switch (Map1[i][j]) {
 				case 1:
 					Normalblock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
 					Normalblock.ShowBitmap();
@@ -285,6 +260,30 @@ void Map::OnShow(int MapNumber)
 					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
 					PortalBlock.ShowBitmap();
 					break;
+				case 60:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
+				case 61:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
+				case 62:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
+				case 63:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
+				case 64:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
+				case 65:
+					PortalBlock.SetTopLeft(x, y); // 指定第(i, j)這一格的座標 
+					PortalBlock.ShowBitmap();
+					break;
 				case 10:
 					if (i == CheckpointY && j == CheckpointX) {
 						LightCheckpointBlock.SetTopLeft(x, y);
@@ -296,7 +295,6 @@ void Map::OnShow(int MapNumber)
 						CheckpointBlock.ShowBitmap();
 					}
 					break;
-				}
 			}
 		}
 	}
@@ -340,13 +338,25 @@ int Map::GetCheckpointY()
 }
 int Map::GetPortalX(int index)
 {
-	index = index % 10;
-	return Portal[index][1] - 1;
+	if (index < 60) {
+		index = index % 10;
+		return Portal[index][1] - 1;
+	}
+	else {
+		index = index % 10 + 10;
+		return Portal[index][1] - 1;
+	}
 }
 int Map::GetPortalY(int index)
 {
-	index = index % 10;
-	return Portal[index][0] - 1;
+	if (index < 60) {
+		index = index % 10;
+		return Portal[index][0] - 1;
+	}
+	else {
+		index = index % 10 + 10;
+		return Portal[index][0] - 1;
+	}
 }
 bool Map::GetIsPass()
 {

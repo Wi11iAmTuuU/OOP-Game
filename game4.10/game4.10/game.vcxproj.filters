@@ -117,13 +117,19 @@
     <ClCompile Include="Source\Map.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CDiamond.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Counter.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameStartView.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EscMenu.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Diamond.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameOver.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -161,13 +167,19 @@
     <ClInclude Include="Source\Map.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CDiamond.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Counter.h">
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameStartview.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EscMenu.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Diamond.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameOver.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

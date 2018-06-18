@@ -10,7 +10,6 @@ namespace game_framework
 {
 Counter::Counter()
 {
-    x = y = 0;
     DiamondCount = 0;
 }
 void Counter::LoadBitmap()
@@ -21,39 +20,34 @@ void Counter::LoadBitmap()
     fourDiamond.AddBitmap("RES\\counter\\fourDiamond.bmp", RGB(255, 255, 255));
     fiveDiamond.AddBitmap("RES\\counter\\fiveDiamond.bmp", RGB(255, 255, 255));
 }
-void Counter::OnShow(Map* m)
+void Counter::OnShow()
 {
     if (DiamondCount == 1)
     {
-        oneDiamond.SetTopLeft(x, y);
+        oneDiamond.SetTopLeft(0, 0);
         oneDiamond.OnShow();
     }
     else if (DiamondCount == 2)
     {
-        twoDiamond.SetTopLeft(x, y);
+        twoDiamond.SetTopLeft(0, 0);
         twoDiamond.OnShow();
     }
     else if (DiamondCount == 3)
     {
-        threeDiamond.SetTopLeft(x, y);
+        threeDiamond.SetTopLeft(0, 0);
         threeDiamond.OnShow();
     }
     else if (DiamondCount == 4)
     {
-        fourDiamond.SetTopLeft(x, y);
+        fourDiamond.SetTopLeft(0, 0);
         fourDiamond.OnShow();
     }
     else if (DiamondCount == 5)
     {
-        fiveDiamond.SetTopLeft(x, y);
+        fiveDiamond.SetTopLeft(0, 0);
         fiveDiamond.OnShow();
     }
     else {}
-}
-void Counter::SetMapXY(Map* m)
-{
-    x = m->Getsx();
-    y = m->Getsy();
 }
 void Counter::Add(int n)
 {

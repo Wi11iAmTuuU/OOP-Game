@@ -42,8 +42,10 @@
 #include "CCharacter.h"
 #include "Counter.h"
 #include "Map.h"
-#include "CDiamond.h"
+#include "Diamond.h"
 #include "GameStartview.h"
+#include "EscMenu.h"
+#include "GameOver.h"
 
 namespace game_framework
 {
@@ -53,7 +55,13 @@ namespace game_framework
 
 enum AUDIO_ID  				// 定義各種音效的編號
 {
-	AUDIO_MENU				// 1
+	AUDIO_MENU,				// 1
+	AUDIO_DOOR,				
+	AUDIO_JUMP,
+	AUDIO_PORTAL,
+	AUDIO_WATER,
+	AUDIO_UNPASS,
+	AUDIO_DIAMOND
 };
 
 /////////////////////////////////////////////////////////////////////////////
@@ -109,12 +117,14 @@ class CGameStateRun : public CGameState
         void OnShow();									// 顯示這個狀態的遊戲畫面
     private:
         int				MapNumber;						// 地圖編號
+		bool			pass;
         CMovingBitmap	background;						// 背景圖
         CMovingBitmap	help;							// 說明圖
         CMovingBitmap	corner;							// 角落圖
-        CDiamond		diamond[5][5];					// 鑽石[關卡數][鑽石數]
+        Diamond		diamond[5][5];					// 鑽石[關卡數][鑽石數]
         CCharacter		character;						// 拍子
         Counter			counter;						// 計數器
+		EscMenu			escmenu;						// Esc選單
         Map	gamemap[5];
         Map* GameMap;
 };
@@ -135,6 +145,7 @@ class CGameStateOver : public CGameState
         void OnShow();									// 顯示這個狀態的遊戲畫面
     private:
         int counter;	// 倒數之計數器
+		GameOver BigShow;
 };
 
 }

@@ -9,9 +9,11 @@
 #include "fstream"
 namespace game_framework
 {
-
-
-int Map::GetWidth() //取得背景寬度
+	Map::Map()
+	{
+		IsPass = false;
+	}
+	int Map::GetWidth() //取得背景寬度
 {
     return background.Width();
 }
@@ -34,6 +36,7 @@ int Map::GetBlock(int x, int y)
     //map[x][y]中的y表示X軸的格數，x表示Y軸
     return Map1[gy][gx]; // 回傳方塊
 }
+
 void Map::StorePortal()
 {
 	int index = 50;
@@ -43,8 +46,8 @@ void Map::StorePortal()
 		for (j = 0; j < 30; j++) {
 			for (k = 0; k < 40; k++) {
 				if (Map1[j][k] == index) {
-					Portal[i][0] = j+1;
-					Portal[i][1] = k+1;
+					Portal[i][0] = j + 1;
+					Portal[i][1] = k + 1;
 					check = 1;
 					break;
 				}
@@ -57,7 +60,6 @@ void Map::StorePortal()
 		check = 0;
 	}
 }
-
 void Map::ReadMap(int MapNumber)
 {
     if (MapNumber == 0)
@@ -139,8 +141,6 @@ void Map::LoadBitmap() //載入圖片
 	JumpBlock.LoadBitmap("RES\\Block\\Jumpblock.bmp", RGB(255, 255, 255));
 	PortalBlock.LoadBitmap("RES\\Block\\Portalblock.bmp", RGB(255, 255, 255));
 }
-
-
 
 void Map::OnMove(int x, int y)
 {
@@ -311,6 +311,10 @@ void Map::SetCheckpoint(int X, int Y)
     CheckpointX = X / 48; // 轉換為X軸格座標(整數除法)
     CheckpointY = Y / 40; // 轉換為Y軸格座標(整數除法)
 }
+void Map::SetIsPass(bool pass)
+{
+	IsPass = pass;
+}
 bool Map::isEmpty(int x, int y)
 {
     int gx = x / 48; // 轉換為X軸格座標(整數除法)
@@ -343,6 +347,10 @@ int Map::GetPortalY(int index)
 {
 	index = index % 10;
 	return Portal[index][0] - 1;
+}
+bool Map::GetIsPass()
+{
+	return IsPass;
 }
 //int Map::GetMapNumber()
 //{

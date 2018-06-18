@@ -94,7 +94,7 @@ IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
 IDB_Brown               BITMAP                  "..\\res\\bitmap4.bmp"
 
-IDB_BACKGROUND          BITMAP                  "..\\RES\\background 1920 .bmp"
+IDB_BACKGROUND          BITMAP                  "..\\RES\\background1920.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

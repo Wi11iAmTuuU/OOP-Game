@@ -1,6 +1,7 @@
 #pragma once
-#include"Map.h"
+#include "Map.h"
 #include "Counter.h"
+#include "EscMenu.h"
 namespace game_framework
 {
 /////////////////////////////////////////////////////////////////////////////
@@ -10,27 +11,39 @@ namespace game_framework
 
 class CCharacter
 {
+	enum AUDIO_ID  				// 定義各種音效的編號
+	{
+		AUDIO_MENU,				// 1
+		AUDIO_DOOR,
+		AUDIO_JUMP,
+		AUDIO_PORTAL,
+		AUDIO_WATER,
+		AUDIO_UNPASS,
+		AUDIO_DIAMOND
+	};
     public:
         CCharacter();
         int  GetX1();						// 擦子左上角 x 座標
         int  GetY1();						// 擦子左上角 y 座標
         int  GetX2();						// 擦子右下角 x 座標
         int  GetY2();						// 擦子右下角 y 座標
+		bool GetIsESC();
         void Initialize();					// 設定擦子為初始值
         void LoadBitmap();					// 載入圖形
         void SetXY(int nx, int ny);			// 設定擦子左上角座標
-        void OnMove(Map*, int*, Counter*);	// 移動擦子
+        void OnMove(Map*, int*, Counter*, EscMenu*);	// 移動擦子
         void OnShow(Map*);					// 將擦子圖形貼到畫面
         void SetMovingLeft(bool flag);		// 設定是否正在往左移動
         void SetMovingRight(bool flag);		// 設定是否正在往右移動
         void SetMovingJump(bool flag);		// 設定是否正在往上移動
         void SetMovingDown(bool flag);		// 設定是否正在往下移動
         void SetMovingDie(bool flag);		// 設定是否正在自殺
+		void SetIsESC(bool state);
         //
         void SetMovingUp(bool flag);		// 設定是否正在往下移動
         //
         int  GetMapNumber();				// 取的地圖編號
-        void ChangeMapNumber(int);           //改變地圖編號
+        void ChangeMapNumber(int);          // 改變地圖編號
     protected:
         CAnimation animation;				// 擦子的動畫
         CAnimation animation_Underarm;		// 擦子的動畫
@@ -61,6 +74,7 @@ class CCharacter
 		bool IsJumpingRight;
 		bool IsJumpingLeft;
 		bool IsTransfer;
+		bool IsESC;
         //
         bool isMovingUp;
         //

@@ -9,6 +9,7 @@ namespace game_framework
 class Map
 {
     public:
+		Map();
         int  GetWidth();                    // 取得背景寬度
         int  GetHeight();                   // 取得背景高度
         int  ScreenX(int x);				// 螢幕 x 座標
@@ -22,13 +23,15 @@ class Map
         void OnShow(int);					// 將圖形貼到畫面
         void SetXY(int nx, int ny);         // 設定螢幕畫面左上角的座標
         void SetCheckpoint(int, int);		// 設定記錄點座標
+		void SetIsPass(bool pass);
         bool isEmpty(int x, int y);         // 判斷碰壁;
         int	 Getsx();						// 計數器用
         int	 Getsy();						// 計數器用
         int	 GetCheckpointX();				// 記錄點用
         int	 GetCheckpointY();				// 記錄點用
 		int  GetPortalX(int);				// 傳送門用
-		int  GetPortalY(int);				// 傳送用
+		int  GetPortalY(int);				// 傳送門用
+		bool GetIsPass();
         //int  GetMapNumber();				// 取的地圖編號
         //void ChangeMapNumber(int);             //改變地圖編號
 protected:
@@ -50,5 +53,6 @@ private:
 								// 6 = 跳躍方塊 9 = 水方塊 10 = CheckPoint 20 = 回大廳門 21 = 第一關的門 22 = 第二關的門 23 = 第三關的門 傳送門 = 50~59
 	int Portal[20][2] = { 0 };
 	int CheckpointX, CheckpointY;
+	bool IsPass;						// 過關重要依據
 };
 }

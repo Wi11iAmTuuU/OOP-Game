@@ -14,36 +14,29 @@ GameStartView::GameStartView()
 void GameStartView::Initialize()
 {
 	state = 0;				// 最初始(遊戲開始)
-	MusicState = true;		// 音樂設定(開啟)
 }
 void GameStartView::LoadBitmap()
 {
-	FingerMute.AddBitmap("RES\\Menu\\Menu_fingermute.bmp");
-	FingerPlayMute.AddBitmap("RES\\Menu\\Menu_fingerplay_mute.bmp");
-	FingerVolume.AddBitmap("RES\\Menu\\Menu_fingervolume.bmp");
-	FingerPlayVolume.AddBitmap("RES\\Menu\\Menu_fingerplay_volume.bmp");
+	FingerPlay.AddBitmap("RES\\Menu\\Menu_fingerplay.bmp");
+	FingerQuestion.AddBitmap("RES\\Menu\\Menu_fingerquestion.bmp");
+	Question.AddBitmap("RES\\Menu\\Menu_question.bmp");
 }
 void GameStartView::OnShow()
 {
-    if (state == 0 && MusicState)
+    if (state == 0)
     {
-        FingerPlayVolume.SetTopLeft(0, 0);
-		FingerPlayVolume.OnShow();
+		FingerPlay.SetTopLeft(0, 0);
+		FingerPlay.OnShow();
     }
-    else if (state == 0 && !MusicState)
+    else if (state == 1)
     {
-        FingerPlayMute.SetTopLeft(0, 0);
-        FingerPlayMute.OnShow();
+		FingerQuestion.SetTopLeft(0, 0);
+		FingerQuestion.OnShow();
     }
-    else if (state == 1 && MusicState)
+    else if (state == 2)
     {
-        FingerVolume.SetTopLeft(0, 0);
-        FingerVolume.OnShow();
-    }
-    else if (state == 1 && !MusicState)
-    {
-        FingerMute.SetTopLeft(0, 0);
-        FingerMute.OnShow();
+		Question.SetTopLeft(0, 0);
+		Question.OnShow();
     }
 }
 void GameStartView::clickLeft()
@@ -68,20 +61,14 @@ int GameStartView::clickEnter()
     {
         return 1;
     }
-    else
+    else if(state == 1)
     {
-		if (MusicState) {
-			MusicState = false;
-			return 0;
-		}
-		else {
-			MusicState = true;
-			return 0;
-		} 
+		state = 2;
     }
-}
-bool GameStartView::GetMusicState()
-{
-	return MusicState;
+	else
+	{
+		state = 1;	
+	}
+	return 0;
 }
 }

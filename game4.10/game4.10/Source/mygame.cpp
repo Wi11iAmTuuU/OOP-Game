@@ -263,13 +263,6 @@ namespace game_framework
 
 			gamemap[1].SetCheckpoint(960, 1125);
 		}
-		if (MapNumber != 2)
-		{
-			for (int i = 0; i < NUMDIAMOND; i++)
-				diamond[2][i].SetIsAlive(true);
-
-			gamemap[2].SetCheckpoint(960, 1125);
-		}
 		GameMap->OnMove(character.GetX1(), character.GetY1());
 		if (MapNumber == 0 && !pass) {
 			int passcount = 0;

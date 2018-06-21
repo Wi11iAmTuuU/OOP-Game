@@ -391,7 +391,7 @@ namespace game_framework
 				character.SetIsESC(false);
 				escmenu.SetState(0);
 				for (int i = 0; i < 5; i++)
-					diamond[1][i].SetIsAlive(true);
+					diamond[MapNumber][i].SetIsAlive(true);
 
 				gamemap[1].SetCheckpoint(960, 1125);
 			}
